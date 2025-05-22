@@ -12,4 +12,8 @@ public class Task {
     private String name;
     private String description;
     private String date;
+    private String time;
+    private Integer statusId;
+    private String userId;
+
 }

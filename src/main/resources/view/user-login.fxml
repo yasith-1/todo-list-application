@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="466.0" prefWidth="815.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="466.0" prefWidth="815.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
    <children>
       <Rectangle fill="#5f6365" height="472.0" layoutX="-22.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="476.0" />
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#b2bec3" height="440.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="424.0" />
@@ -30,18 +30,17 @@
             <Font name="Poppins Bold" size="26.0" />
          </font>
       </Label>
-      <Separator layoutX="483.0" layoutY="113.0" prefHeight="4.0" prefWidth="299.0" />
-      <JFXTextField focusColor="#27ab9c" layoutX="494.0" layoutY="213.0" prefHeight="26.0" prefWidth="278.0" promptText="Username" style="-fx-cursor: hand;">
+      <JFXTextField fx:id="usernameField" focusColor="#27ab9c" layoutX="494.0" layoutY="213.0" prefHeight="26.0" prefWidth="278.0" promptText="Username" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField focusColor="#27ab9c" layoutX="494.0" layoutY="276.0" prefHeight="26.0" prefWidth="278.0" promptText="Password" style="-fx-cursor: hand;">
+      <JFXPasswordField fx:id="passwordField" focusColor="#27ab9c" layoutX="494.0" layoutY="276.0" prefHeight="26.0" prefWidth="278.0" promptText="Password" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="346.0" prefHeight="37.0" prefWidth="278.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62;" text="Login" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="346.0" onAction="#LoginOnActionButton" prefHeight="37.0" prefWidth="278.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -52,15 +51,16 @@
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="410.0" prefHeight="37.0" prefWidth="313.0" text="Welcome !" textFill="#0a3d62">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="410.0" prefHeight="37.0" prefWidth="313.0" text="Welcome Task Master !" textFill="#0a3d62">
          <font>
-            <Font name="Poppins Bold" size="28.0" />
+            <Font name="Poppins Bold" size="24.0" />
          </font>
       </Label>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="412.0" prefHeight="37.0" prefWidth="313.0" style="-fx-background-radius: 15; -fx-background-color: #3c6382;" text="Don't have an account ? signup here" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="412.0" onAction="#signupOnActionButton" prefHeight="37.0" prefWidth="313.0" style="-fx-background-radius: 15; -fx-background-color: #3c6382; -fx-cursor: hand;" text="Don't have an account ? signup here" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
+      <Separator layoutX="483.0" layoutY="113.0" prefHeight="4.0" prefWidth="299.0" style="-fx-background-color: #ced6e0;" />
    </children>
 </AnchorPane>
