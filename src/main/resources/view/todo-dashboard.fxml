@@ -20,17 +20,17 @@
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-        <ImageView fitHeight="103.0" fitWidth="112.0" layoutX="101.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="103.0" fitWidth="112.0" layoutX="101.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/avatar.png" />
             </image>
         </ImageView>
-        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="182.0" prefHeight="17.0" prefWidth="200.0" text="Name" textFill="WHITE">
+        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="237.0" prefHeight="17.0" prefWidth="200.0" text="Name" textFill="WHITE">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtNameField" focusColor="#27ab9c" layoutX="23.0" layoutY="356.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Name" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white;" unFocusColor="#dad9d9">
+        <JFXTextField fx:id="txtTaskNameField" focusColor="#27ab9c" layoutX="23.0" layoutY="347.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Name" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white;" unFocusColor="#dad9d9">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
             </font>
@@ -41,28 +41,22 @@
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtDescriptionField" focusColor="#27ab9c" layoutX="23.0" layoutY="412.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Description ( optional )" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white;" unFocusColor="#dad9d9">
+        <JFXTextField fx:id="txtTaskDescriptionField" focusColor="#27ab9c" layoutX="23.0" layoutY="403.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Description ( optional )" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white;" unFocusColor="#dad9d9">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </JFXTextField>
-        <DatePicker fx:id="txtDate" layoutX="22.0" layoutY="473.0" prefHeight="33.0" prefWidth="270.0" promptText="Select Due date" />
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#00000025" height="35.0" layoutX="11.0" layoutY="229.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="235.0" prefHeight="23.0" prefWidth="270.0" text="Plan your day with me !" textFill="#00fc6d">
-            <font>
-                <Font name="Poppins Italic" size="17.0" />
-            </font>
-        </Label>
-        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="556.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62;" text="Add Task" textFill="WHITE">
+        <DatePicker fx:id="txtDate" layoutX="22.0" layoutY="464.0" prefHeight="33.0" prefWidth="270.0" promptText="Select Due date" />
+        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="520.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62;" text="Add Task" textFill="WHITE">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </JFXButton>
-        <JFXListView fx:id="todoListView" layoutX="334.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #b2bec3; -fx-background-radius: 15;" />
+        <JFXListView fx:id="todoListView" layoutX="331.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #b2bec3; -fx-background-radius: 15;" />
         <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #b2bec3; -fx-background-radius: 15;" />
-        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="334.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
+        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="331.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
         <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="717.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="TODO">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="418.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="TODO">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
@@ -72,5 +66,16 @@
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="575.0" onAction="#seeAllTaskOnActionButton" prefHeight="44.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: #78e08f; -fx-text-fill: black;" text="Sell all Task" textFill="WHITE">
+         <font>
+            <Font name="Poppins Regular" size="16.0" />
+         </font>
+      </JFXButton>
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#00000025" height="35.0" layoutX="14.0" layoutY="63.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="69.0" prefHeight="23.0" prefWidth="270.0" text="Plan your day with me !" textFill="#00fc6d">
+         <font>
+            <Font name="Poppins Regular" size="17.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
