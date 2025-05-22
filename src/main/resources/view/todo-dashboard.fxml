@@ -14,8 +14,8 @@
 <AnchorPane prefHeight="635.0" prefWidth="1105.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
     <children>
         <Rectangle fill="#5f6365" height="635.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="316.0" />
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#00000030" height="35.0" layoutX="17.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="270.0" />
-        <Label fx:id="dateTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Loging time :" textFill="WHITE">
+        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#00000030" height="35.0" layoutX="17.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
+        <Label fx:id="dateTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Loging time :" textFill="WHITE">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
