@@ -11,14 +11,18 @@ import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
+import model.Task;
 import org.controlsfx.control.Notifications;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class DashboardController {
 
@@ -31,6 +35,8 @@ public class DashboardController {
     @FXML
     private Label dateTimeLabel;
 
+
+    String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd - HH:mm:ss");
 
     //    Date and time----------------------------------------------------------------------------------
@@ -84,7 +90,7 @@ public class DashboardController {
                 ps.setString(2, txtTaskNameField.getText());
                 ps.setString(3, txtTaskDescriptionField.getText());
                 ps.setString(4, String.valueOf(txtDate.getValue()));
-                ps.setString(5, String.valueOf(txtDate.getValue()));
+                ps.setString(5, currentTime);
                 ps.setInt(6, 1);
 
                 if (ps.executeUpdate() > 0) {
@@ -101,6 +107,19 @@ public class DashboardController {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private void loadTask() {
+        ArrayList<Task> todoListArrayList = new ArrayList<>();
+        try {
+            ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM task WHERE user_id='" + userId + "'");
+            while (rst.next()) {
+                todoListArrayList.add(new ToDoList(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4)));
+            }
+            return todoListArrayList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String genarateTaskId() {
