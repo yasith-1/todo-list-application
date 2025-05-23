@@ -1,5 +1,6 @@
 package controller.dashboard;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.KeyFrame;
@@ -20,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.CompletedTask;
 import model.Task;
 import org.controlsfx.control.Notifications;
 
@@ -46,6 +48,7 @@ public class DashboardFormController implements Initializable {
     private Label dateTimeLabel;
 
     String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
+    String currentDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd - HH:mm:ss");
 
     //    Date and time----------------------------------------------------------------------------------
@@ -53,6 +56,7 @@ public class DashboardFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setUserName();
         loadtask();
+        loadCompletedTask();
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateDateTime()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -84,6 +88,7 @@ public class DashboardFormController implements Initializable {
             Boolean isAdded = DashboardController.getInstance().saveTaskDatabase(task);
             if (isAdded) {
                 Notifications.create().title("Sucess").text("Task added Sucessfully").position(Pos.BOTTOM_RIGHT).showInformation();
+                todoListView.getItems().clear();
                 loadtask();
             } else {
                 Notifications.create().title("Warning").text("Error").position(Pos.BOTTOM_RIGHT).showInformation();
@@ -112,12 +117,13 @@ public class DashboardFormController implements Initializable {
         stage.show();
     }
 
+    //    Load task method---------------------------------------------------------------------------------------
     private void loadtask() {
         try {
             ArrayList<Task> taskArrayList = DashboardController.getInstance().loadTask();
 
             if (taskArrayList == null || taskArrayList.isEmpty()) {
-                System.out.println("No tasks to display.");
+                new Alert(Alert.AlertType.WARNING, "No tasks to display !").show();
                 return;
             } else {
                 for (Task task : taskArrayList) {
@@ -134,18 +140,11 @@ public class DashboardFormController implements Initializable {
                             "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
 
                     // First row - Task name
-                    Label taskNameLabel = new Label("Task: " + task.getName());
+                    Label taskNameLabel = new Label("Task : " + task.getName());
                     taskNameLabel.setStyle("-fx-font-size: 16px; " +
                             "-fx-font-weight: bold; " +
                             "-fx-text-fill: #333333; " +
                             "-fx-wrap-text: true;"); // Enable text wrapping for long task names
-
-                    // second row - Task name
-//                    Label taskDescriptionLabel = new Label("Description: " + task.getDescription());
-//                    taskNameLabel.setStyle("-fx-font-size: 16px; " +
-//                            "-fx-font-weight: regular; " +
-//                            "-fx-text-fill: #333333; " +
-//                            "-fx-wrap-text: true;"); // Enable text wrapping for long task names
 
                     // HBOX  - Date and Checkbox in HBox
                     HBox hBox = new HBox();
@@ -154,25 +153,19 @@ public class DashboardFormController implements Initializable {
 
                     String taskDate = task.getDate();
                     if (taskDate != null && !taskDate.isEmpty()) {
-                        Label dateLabel = new Label("Date: " + taskDate);
-                        dateLabel.setStyle("-fx-font-size: 14px; " +
-                                "-fx-text-fill: #555555;");
+                        Label dateLabel = new Label("Date : " + taskDate);
+                        dateLabel.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #555555;");
                         hBox.getChildren().add(dateLabel);
                     }
 
                     CheckBox checkBox = new CheckBox("Completed");
-                    checkBox.setStyle("-fx-font-size: 14px; " +
-                            "-fx-text-fill: #444444; " +
-                            "-fx-cursor: hand;");
+                    checkBox.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #444444; " + "-fx-cursor: hand;");
                     hBox.getChildren().add(checkBox);
 
                     // Add task description if available (optional third row)
                     if (task.getDescription() != null && !task.getDescription().equals("null") && !task.getDescription().isEmpty()) {
-                        Label descriptionLabel = new Label("Description: " + task.getDescription());
-                        descriptionLabel.setStyle("-fx-font-size: 12px; " +
-                                "-fx-text-fill: #666666; " +
-                                "-fx-wrap-text: true; " +
-                                "-fx-font-style: italic;");
+                        Label descriptionLabel = new Label("Description : " + task.getDescription());
+                        descriptionLabel.setStyle("-fx-font-size: 12px; " + "-fx-text-fill: #666666; " + "-fx-wrap-text: true; " + "-fx-font-style: italic;");
                         vBox.getChildren().addAll(taskNameLabel, hBox, descriptionLabel);
                     } else {
                         vBox.getChildren().addAll(taskNameLabel, hBox);
@@ -183,17 +176,112 @@ public class DashboardFormController implements Initializable {
                     // Checkbox action (uncomment and modify as needed)
                     checkBox.setOnAction(actionEvent -> {
                         if (checkBox.isSelected()) {
-                            String currentDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+//                            First complete task insert to database table
+//                            After delete that record from task table
+//                            After that record move to completed task side
+//                            After click load button for load all
+//
+                            try {
+                                Boolean isCompTaskAdded = DashboardController.getInstance().addCompletedTask(task.getId(), task.getUserId(), currentDate, currentTime);
+                                if (isCompTaskAdded) {
+                                    Boolean isTaskRemoved = DashboardController.getInstance().removeTask(task.getId(), task.getUserId());
+                                    if (isTaskRemoved) {
+                                        new Alert(Alert.AlertType.INFORMATION, "Task marked as completed!").show();
+                                        doneListView.getItems().clear();
+                                        loadCompletedTask();
+                                        todoListView.getItems().remove(vBox);
+                                        return;
+                                    } else {
+                                        new Alert(Alert.AlertType.ERROR, "Technical issue please try again !").show();
+                                    }
 
-
-
-                            new Alert(Alert.AlertType.INFORMATION, "Task marked as completed!").show();
-                            todoListView.getItems().remove(vBox);
+                                } else {
+                                    new Alert(Alert.AlertType.ERROR, "something went wrong ! try again...").show();
+                                }
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     });
                 }
 
-                new Alert(Alert.AlertType.INFORMATION, "Task Loaded Sucessfully ! ").show();
+//                new Alert(Alert.AlertType.INFORMATION, "Task Loaded Sucessfully ! ").show();
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error loading tasks: " + e.getMessage());
+            new Alert(Alert.AlertType.ERROR, "Error loading tasks: " + e.getMessage()).show();
+        }
+    }
+
+    //    Load completed task method---------------------------------------------------------------------------------------
+    private void loadCompletedTask() {
+        try {
+            ArrayList<CompletedTask> compTaskArrayList = DashboardController.getInstance().loadCompletedTask();
+
+            if (compTaskArrayList == null || compTaskArrayList.isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "No tasks to display !").show();
+                return;
+            } else {
+                for (CompletedTask compTask : compTaskArrayList) {
+
+                    // Main container - VBox for vertical layout
+                    VBox vBox = new VBox();
+                    vBox.setSpacing(8);
+                    vBox.setStyle("-fx-background-color: linear-gradient(to right, #FAD0C4, #FFD1DC); " +
+                            "-fx-border-color: #FF6F91; " +
+                            "-fx-border-width: 2px; " +
+                            "-fx-border-radius: 10; " +
+                            "-fx-background-radius: 10; " +
+                            "-fx-padding: 15; " +
+                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
+
+                    // First row - Task name
+                    Label taskNameLabel = new Label("Task : " + compTask.getName());
+                    taskNameLabel.setStyle("-fx-font-size: 16px; " +
+                            "-fx-font-weight: bold; " +
+                            "-fx-text-fill: #333333; " +
+                            "-fx-wrap-text: true;"); // Enable text wrapping for long task names
+
+                    // HBOX  - Date and Checkbox in HBox
+                    HBox hBox = new HBox();
+                    hBox.setSpacing(15);
+                    hBox.setAlignment(Pos.CENTER_LEFT);
+
+                    String taskDate = compTask.getDate();
+                    if (taskDate != null && !taskDate.isEmpty()) {
+                        Label dateLabel = new Label("Date : " + taskDate);
+                        dateLabel.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #555555;");
+                        hBox.getChildren().add(dateLabel);
+                    }
+
+                    String taskStatus = String.valueOf(compTask.getStatusId());
+                    if (taskStatus != null && !taskStatus.isEmpty()) {
+                        Label dateLabel = new Label("Task Status : " + (Integer.parseInt(taskStatus) == 2 ? "Completed" : "Pending"));
+                        dateLabel.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #555555;");
+                        hBox.getChildren().add(dateLabel);
+                    }
+
+//                    CheckBox checkBox = new CheckBox("Completed");
+//                    checkBox.setStyle("-fx-font-size: 14px; " +
+//                            "-fx-text-fill: #444444; " +
+//                            "-fx-cursor: hand;");
+//                    hBox.getChildren().add(checkBox);
+
+                    // Add task description if available (optional third row)
+                    if (compTask.getDescription() != null && !compTask.getDescription().equals("null") && !compTask.getDescription().isEmpty()) {
+                        Label descriptionLabel = new Label("Description: " + compTask.getDescription());
+                        descriptionLabel.setStyle("-fx-font-size: 12px; " + "-fx-text-fill: #666666; " + "-fx-wrap-text: true; " + "-fx-font-style: italic;");
+                        vBox.getChildren().addAll(taskNameLabel, hBox, descriptionLabel);
+                    } else {
+                        vBox.getChildren().addAll(taskNameLabel, hBox);
+                    }
+
+                    doneListView.getItems().add(vBox);
+
+
+                }
+//if you need an alert add here
             }
 
         } catch (Exception e) {
@@ -205,6 +293,8 @@ public class DashboardFormController implements Initializable {
 
     public void loadTaskOnActionButton(ActionEvent actionEvent) {
         todoListView.getItems().clear();
+        doneListView.getItems().clear();
         loadtask();
+        loadCompletedTask();
     }
 }

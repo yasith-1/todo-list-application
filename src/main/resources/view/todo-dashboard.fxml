@@ -57,7 +57,7 @@
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="804.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="DONE">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="804.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Completed">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
