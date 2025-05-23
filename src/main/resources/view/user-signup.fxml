@@ -46,8 +46,8 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ffffff45" height="37.0" layoutX="499.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="291.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="497.0" layoutY="136.0" prefHeight="20.0" prefWidth="291.0" text="Ensure your information correct !" textFill="#402323">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#bcbbbb45" height="37.0" layoutX="486.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="313.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="501.0" layoutY="137.0" prefHeight="20.0" prefWidth="291.0" text="Make sure your informations are correct." textFill="#402323">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
@@ -66,7 +66,7 @@
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#0000005b" height="37.0" layoutX="506.0" layoutY="421.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="278.0" />
       <Text fill="WHITE" layoutX="581.0" layoutY="445.0" onMouseClicked="#backToLoginText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="&lt;-- Back to Login" textAlignment="JUSTIFY">
          <font>
-            <Font name="Poppins Regular" size="15.0" />
+            <Font name="Poppins Bold" size="15.0" />
          </font>
       </Text>
    </children>

@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,8 +16,10 @@ import model.User;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SignupFormController {
+public class SignupFormController implements Initializable {
 
     @FXML
     public JFXTextField idField;
@@ -26,6 +29,11 @@ public class SignupFormController {
 
     @FXML
     private JFXTextField usernameField;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setUserId();
+    }
 
     @FXML
     void RegisterOnActionButton(ActionEvent event) {
@@ -69,4 +77,10 @@ public class SignupFormController {
         stage.getIcons().add(new Image("/images/icon.png"));
         stage.show();
     }
+
+    private void setUserId(){
+        String userId = SignupController.getInstance().generateuserId();
+        idField.setText(userId);
+    }
+
 }

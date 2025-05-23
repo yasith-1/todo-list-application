@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DashboardController {
 
@@ -67,5 +68,30 @@ public class DashboardController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ArrayList<Task> loadTask() {
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        try {
+            ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM task WHERE user_id='" + userId + "'");
+            while (rst.next()) {
+                taskArrayList.add(new Task(
+                        rst.getString("task_id"),
+                        rst.getString("name"),
+                        rst.getString("description"),
+                        rst.getString("date"),
+                        rst.getString("time"),
+                        rst.getInt("status_id"),
+                        rst.getString("user_id")
+                ));
+            }
+            return taskArrayList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addCompletedTask(){
+
     }
 }

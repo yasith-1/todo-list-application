@@ -24,7 +24,7 @@ public class LoginFormController {
     private JFXTextField usernameField;
 
     @FXML
-    void LoginOnActionButton(ActionEvent event) throws IOException {
+    void LoginOnActionButton(ActionEvent actionEvent) throws IOException {
         if (usernameField.getText().isEmpty()) {
             Notifications.create().title("Warning").text("Missing username").position(Pos.BOTTOM_RIGHT).showInformation();
             return;
@@ -36,6 +36,9 @@ public class LoginFormController {
             Boolean isAvailable = LoginController.getInstance().userAuthentication(usernameField.getText(), passwordField.getText());
             if (isAvailable) {
 //                User Available (allow access to login)
+                Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                loginStage.close();
+
                 Stage stage = new Stage();
                 stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/todo-dashboard.fxml"))));
                 stage.setTitle("Dashboard");
