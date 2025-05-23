@@ -1,5 +1,6 @@
-package controller;
+package controller.login;
 
+import controller.dashboard.DashboardController;
 import database.DBconnection;
 
 import java.sql.PreparedStatement;
@@ -8,9 +9,7 @@ import java.sql.ResultSet;
 public class LoginController {
 
     private static LoginController instance;
-
     private LoginController() {
-
     }
 
     public static LoginController getInstance() {

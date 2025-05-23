@@ -12,8 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="476.0" prefWidth="835.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignupFormController">
+<AnchorPane prefHeight="476.0" prefWidth="835.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.signup.SignupFormController">
    <children>
       <Rectangle fill="#5f6365" height="476.0" layoutX="-12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="476.0" />
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#b2bec3" height="440.0" layoutX="24.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="424.0" />
@@ -59,7 +58,7 @@
          </font>
       </Label>
       <Separator layoutX="493.0" layoutY="106.0" prefHeight="4.0" prefWidth="299.0" style="-fx-background-color: #ced6e0;" />
-      <JFXTextField fx:id="IdField" editable="false" focusColor="#27ab9c" layoutX="504.0" layoutY="187.0" prefHeight="26.0" prefWidth="278.0" promptText="User ID" style="-fx-cursor: hand;">
+      <JFXTextField fx:id="idField" editable="false" focusColor="#27ab9c" layoutX="504.0" layoutY="187.0" prefHeight="26.0" prefWidth="278.0" promptText="User ID" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>

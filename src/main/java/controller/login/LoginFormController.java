@@ -1,8 +1,7 @@
-package controller;
+package controller.login;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import database.DBconnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 
 public class LoginFormController {
 
@@ -35,7 +33,8 @@ public class LoginFormController {
             return;
         } else {
 
-            if (LoginController.getInstance().userAuthentication(usernameField.getText(), passwordField.getText())) {
+            Boolean isAvailable = LoginController.getInstance().userAuthentication(usernameField.getText(), passwordField.getText());
+            if (isAvailable) {
 //                User Available (allow access to login)
                 Stage stage = new Stage();
                 stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/todo-dashboard.fxml"))));

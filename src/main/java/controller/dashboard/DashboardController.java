@@ -1,9 +1,7 @@
-package controller;
+package controller.dashboard;
 
 import database.DBconnection;
-import javafx.geometry.Pos;
 import model.Task;
-import org.controlsfx.control.Notifications;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

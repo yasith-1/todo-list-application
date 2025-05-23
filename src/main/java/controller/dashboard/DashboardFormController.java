@@ -1,8 +1,7 @@
-package controller;
+package controller.dashboard;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import database.DBconnection;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -96,7 +95,6 @@ public class DashboardFormController implements Initializable {
 
     private void setUserName() {
         String loggedUserName = DashboardController.getInstance().getLoggedUserName();
-        System.out.println(loggedUserName);
         txtLogoName.setText(loggedUserName);
     }
 
