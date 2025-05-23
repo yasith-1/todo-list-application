@@ -89,7 +89,7 @@ public class DashboardController {
         }
     }
 
-    public ArrayList<CompletedTask> loadCompletedTask(){
+    public ArrayList<CompletedTask> loadCompletedTask() {
         ArrayList<CompletedTask> compTaskArrayList = new ArrayList<>();
         try {
             ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM `completedtask` WHERE user_id='" + userId + "'");
@@ -110,8 +110,8 @@ public class DashboardController {
         }
     }
 
-    public Boolean addCompletedTask(String completedTaskId, String userId, String completedDate, String completedTime) throws SQLException {
-        String query = "SELECT `task_id`,`name`,`description`,`status_id` FROM `task` WHERE `user_id`='" + userId + "' AND `task_id`='" + completedTaskId + "'";
+    public Boolean addCompletedTask(String completedTaskId, String userId, String CompleteDdate, String CompletedTime) throws SQLException {
+        String query = "SELECT * FROM `task` WHERE `user_id`='" + userId + "' AND `task_id`='" + completedTaskId + "'";
         ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery(query);
 
         while (rst.next()) {
@@ -120,7 +120,7 @@ public class DashboardController {
             String description = rst.getString("description");
             int statusId = 2;
 
-            CompletedTask completedTask = new CompletedTask(taskId, name, description, completedTaskId, completedDate, userId, statusId);
+            CompletedTask completedTask = new CompletedTask(taskId, name, description, CompleteDdate, CompletedTime, userId, statusId);
 
             return addCompletedTask(completedTask);
         }
@@ -130,20 +130,26 @@ public class DashboardController {
     public Boolean addCompletedTask(CompletedTask compTask) throws SQLException {
         String query = "INSERT INTO `completedtask` VALUES(?,?,?,?,?,?,?)";
         PreparedStatement pst = DBconnection.getInstance().getConnection().prepareStatement(query);
-        pst.setString(1,compTask.getId());
-        pst.setString(2,compTask.getName());
-        pst.setString(3,compTask.getDescription());
-        pst.setString(4,compTask.getDate());
-        pst.setString(5,compTask.getTime());
-        pst.setString(6,compTask.getUserId());
-        pst.setInt(7,compTask.getStatusId());
+        pst.setString(1, compTask.getId());
+        pst.setString(2, compTask.getName());
+        pst.setString(3, compTask.getDescription());
+        pst.setString(4, compTask.getDate());
+        pst.setString(5, compTask.getTime());
+        pst.setString(6, compTask.getUserId());
+        pst.setInt(7, compTask.getStatusId());
 
-        return pst.executeUpdate()>0;
+        return pst.executeUpdate() > 0;
     }
 
-    public Boolean removeTask(String taskId,String userId) throws SQLException {
-        String query = "DELETE FROM `task` WHERE `task_id`='"+taskId+"' AND `user_id`='"+userId+"'";
+    public Boolean removeTask(String taskId, String userId) throws SQLException {
+        String query = "DELETE FROM `task` WHERE `task_id`='" + taskId + "' AND `user_id`='" + userId + "'";
         Statement statement = DBconnection.getInstance().getConnection().createStatement();
-        return statement.executeUpdate(query)>0;
+        return statement.executeUpdate(query) > 0;
+    }
+
+    public Boolean removeCompletedTask(String taskId, String userId) throws SQLException {
+        String query = "DELETE FROM `completedtask` WHERE `comptask_id`='" + taskId + "' AND `user_id`='" + userId + "'";
+        Statement statement = DBconnection.getInstance().getConnection().createStatement();
+        return statement.executeUpdate(query) > 0;
     }
 }
