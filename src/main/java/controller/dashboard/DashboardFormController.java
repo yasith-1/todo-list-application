@@ -32,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXCheckBox;
-
 public class DashboardFormController implements Initializable {
 
     public Label txtLogoName;
@@ -42,7 +40,6 @@ public class DashboardFormController implements Initializable {
     public JFXListView doneListView;
     public JFXTextField txtTaskDescriptionField;
     public JFXTextField txtTaskNameField;
-    public StackPane mainStackPain;
     @FXML
     private Label dateTimeLabel;
 
@@ -85,7 +82,7 @@ public class DashboardFormController implements Initializable {
             Task task = new Task(null, txtTaskNameField.getText(), txtTaskDescriptionField.getText().isEmpty() ? "null" : txtTaskDescriptionField.getText(), String.valueOf(txtDate.getValue()), currentTime, 1, null);
             Boolean isAdded = DashboardController.getInstance().saveTaskDatabase(task);
             if (isAdded) {
-                Notifications.create().title("Sucess").text("Task added Sucessfully").position(Pos.BOTTOM_RIGHT).showInformation();
+                Notifications.create().title("Success").text("Task added Successfully !").position(Pos.BOTTOM_RIGHT).showInformation();
                 clearTextField();
                 loadDashBoard();
             } else {
@@ -121,7 +118,11 @@ public class DashboardFormController implements Initializable {
             ArrayList<Task> taskArrayList = DashboardController.getInstance().loadTask();
 
             if (taskArrayList == null || taskArrayList.isEmpty()) {
-                new Alert(Alert.AlertType.WARNING, "No tasks to display !").show();
+                Notifications.create().title("Information").
+                        text("No tasks to display !").
+                        position(Pos.BOTTOM_RIGHT).
+                        hideAfter(Duration.seconds(5)).
+                        showWarning();
                 return;
             } else {
                 for (Task task : taskArrayList) {
@@ -212,12 +213,12 @@ public class DashboardFormController implements Initializable {
                         );
                     });
 
-                    // Add Delete button last
+                    // Add Delete button
                     vBox.getChildren().add(deleteButton);
                     todoListView.getItems().add(vBox);
 
 
-                    // Checkbox action (uncomment and modify as needed)
+                    // Checkbox action logic
                     checkBox.setOnAction(actionEvent -> {
                         if (checkBox.isSelected()) {
 //                            First complete task insert to database table
@@ -232,15 +233,28 @@ public class DashboardFormController implements Initializable {
                                     if (isTaskRemoved) {
                                         loadDashBoard();
                                         todoListView.getItems().remove(vBox);
-//                                        new Alert(Alert.AlertType.INFORMATION, "Task marked as completed!").show();
+                                        Notifications.create().title("Marked").
+                                                text("Marked Task as completed !").
+                                                position(Pos.BOTTOM_RIGHT).
+                                                hideAfter(Duration.seconds(5)).
+                                                showInformation();
                                         return;
                                     } else {
                                         new Alert(Alert.AlertType.ERROR, "Technical issue please try again !").show();
+                                        Notifications.create().title("Incomplete Remove").
+                                                text("Operation not completed try again !").
+                                                position(Pos.BOTTOM_RIGHT).
+                                                hideAfter(Duration.seconds(5)).
+                                                showWarning();
                                         return;
                                     }
 
                                 } else {
-                                    new Alert(Alert.AlertType.ERROR, "something went wrong ! try again...").show();
+                                    Notifications.create().title("Not Marked").
+                                            text("Task not marked !").
+                                            position(Pos.BOTTOM_RIGHT).
+                                            hideAfter(Duration.seconds(5)).
+                                            showError();
                                     return;
                                 }
                             } catch (Exception e) {
@@ -256,23 +270,22 @@ public class DashboardFormController implements Initializable {
                             if (isDeleted) {
                                 todoListView.getItems().remove(vBox);
                                 loadDashBoard();
-//                                new Alert(Alert.AlertType.INFORMATION, "Task deleted successfully!").show();
+                                Notifications.create().title("Deleted").text("Task deleted successfully !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
                             } else {
-                                new Alert(Alert.AlertType.ERROR, "Failed to delete task!").show();
+                                Notifications.create().title("Failed Delete").text("Failed to delete task try again !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                                return;
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
-                            new Alert(Alert.AlertType.ERROR, "An error occurred: " + e.getMessage()).show();
+                            Notifications.create().title("Failed").text("Operation Failed try again !" +e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                         }
                     });
                 }
 
-//                new Alert(Alert.AlertType.INFORMATION, "Task Loaded Sucessfully ! ").show();
+                Notifications.create().title("Loaded Tasks").text("Task Loaded successfully !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
             }
 
         } catch (Exception e) {
-            System.err.println("Error loading tasks: " + e.getMessage());
-            new Alert(Alert.AlertType.ERROR, "Error loading tasks: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading tasks: " + e.getMessage()).hide();
         }
     }
 
@@ -282,7 +295,12 @@ public class DashboardFormController implements Initializable {
             ArrayList<CompletedTask> compTaskArrayList = DashboardController.getInstance().loadCompletedTask();
 
             if (compTaskArrayList == null || compTaskArrayList.isEmpty()) {
-//                new Alert(Alert.AlertType.WARNING, "No tasks to display !").show();
+                Notifications.create().
+                        title("Information").
+                        text("No completed task to display !").
+                        position(Pos.BOTTOM_RIGHT).
+                        hideAfter(Duration.seconds(5)).
+                        showWarning();
                 return;
             } else {
                 for (CompletedTask compTask : compTaskArrayList) {
@@ -388,26 +406,23 @@ public class DashboardFormController implements Initializable {
                             if (isDeleted) {
                                 doneListView.getItems().remove(vBox);
                                 loadDashBoard();
-//                                new Alert(Alert.AlertType.INFORMATION, "Task deleted successfully!").show();
+                                Notifications.create().title("Success").text("Completed Task deleted successfully !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
                             } else {
-                                new Alert(Alert.AlertType.ERROR, "Failed to delete task!").show();
+                                Notifications.create().title("Error").text("Failed to delete completed task!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
-                            new Alert(Alert.AlertType.ERROR, "An error occurred: " + e.getMessage()).show();
+                            Notifications.create().title("Error").text("An error occurred :"+e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                         }
                     });
 
                 }
-//if  need an alert add here
+                Notifications.create().title("Loaded Tasks").text("Completedtask Loaded successfully !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
             }
 
         } catch (Exception e) {
-            System.err.println("Error loading tasks: " + e.getMessage());
-            new Alert(Alert.AlertType.ERROR, "Error loading tasks: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading Completed tasks: " + e.getMessage()).hide();
         }
     }
-
 
     public void loadTaskOnActionButton(ActionEvent actionEvent) {
         loadDashBoard();

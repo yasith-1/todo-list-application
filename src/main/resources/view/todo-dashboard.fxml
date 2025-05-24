@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,8 +33,8 @@
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </Label>
-        <JFXListView fx:id="todoListView" layoutX="331.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #b2bec3; -fx-background-radius: 15;" />
-        <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #b2bec3; -fx-background-radius: 15;" />
+        <JFXListView fx:id="todoListView" layoutX="331.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
+        <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
         <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="503.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Add Task" textFill="WHITE">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
@@ -67,7 +68,7 @@
             <Font name="Poppins Regular" size="16.0" />
          </font>
       </JFXButton>
-        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="182.0" prefHeight="17.0" prefWidth="200.0" text="Name" textFill="WHITE">
+        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="182.0" prefHeight="17.0" prefWidth="200.0" style="-fx-font-weight: 900;" text="Name" textFill="WHITE">
             <font>
                 <Font name="Poppins Bold" size="17.0" />
             </font>
@@ -77,5 +78,6 @@
             <Font name="Poppins Regular" size="16.0" />
          </font>
       </JFXButton>
+      <Separator layoutX="707.0" orientation="VERTICAL" prefHeight="635.0" prefWidth="7.0" />
     </children>
 </AnchorPane>
