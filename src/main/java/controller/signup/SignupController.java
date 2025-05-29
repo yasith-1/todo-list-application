@@ -2,6 +2,7 @@ package controller.signup;
 
 import database.DBconnection;
 import model.User;
+import util.CrudUtil;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,12 +29,13 @@ public class SignupController {
     }
 
     public Boolean addUser(User user) throws SQLException {
-        String query = "INSERT INTO `user` VALUES (?,?,?)";
-        PreparedStatement pst = DBconnection.getInstance().getConnection().prepareStatement(query);
-        pst.setString(1, user.getUserId());
-        pst.setString(2, user.getUsername());
-        pst.setString(3, user.getPassword());
-        return pst.executeUpdate() > 0;
+//        String query = "INSERT INTO `user` VALUES (?,?,?)";
+//        PreparedStatement pst = DBconnection.getInstance().getConnection().prepareStatement(query);
+//        pst.setString(1, user.getUserId());
+//        pst.setString(2, user.getUsername());
+//        pst.setString(3, user.getPassword());
+//        return pst.executeUpdate() > 0;
+        return CrudUtil.execute("INSERT INTO `user` VALUES (?,?,?)", user.getUserId(), user.getUsername(), user.getPassword());
     }
 
     public String generateuserId() {
