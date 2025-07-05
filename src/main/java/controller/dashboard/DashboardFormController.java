@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -23,13 +22,12 @@ import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
@@ -44,7 +42,7 @@ public class DashboardFormController implements Initializable {
     private Label dateTimeLabel;
 
     String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
-    String currentDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+    //    String currentDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd - HH:mm:ss");
 
     //    Date and time----------------------------------------------------------------------------------
@@ -79,7 +77,14 @@ public class DashboardFormController implements Initializable {
             Notifications.create().title("Warning").text("Select Valid date...").position(Pos.BOTTOM_RIGHT).showInformation();
             return;
         } else {
-            Task task = new Task(null, txtTaskNameField.getText(), txtTaskDescriptionField.getText().isEmpty() ? "null" : txtTaskDescriptionField.getText(), String.valueOf(txtDate.getValue()), currentTime, 1, null);
+            Task task = new Task(
+                    null,
+                    txtTaskNameField.getText(),
+                    txtTaskDescriptionField.getText().isEmpty() ? "null" : txtTaskDescriptionField.getText(),
+                    Date.valueOf(txtDate.getValue()),
+                    currentTime,
+                    1,
+                    null);
             Boolean isAdded = DashboardController.getInstance().saveTaskDatabase(task);
             if (isAdded) {
                 Notifications.create().title("Success").text("Task added Successfully !").position(Pos.BOTTOM_RIGHT).showInformation();
@@ -151,7 +156,7 @@ public class DashboardFormController implements Initializable {
                     hBox.setSpacing(15);
                     hBox.setAlignment(Pos.CENTER_LEFT);
 
-                    String taskDate = task.getDate();
+                    String taskDate = task.getDate().toString();
                     if (taskDate != null && !taskDate.isEmpty()) {
                         Label dateLabel = new Label("Date : " + taskDate);
                         dateLabel.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #333333;");
@@ -227,7 +232,12 @@ public class DashboardFormController implements Initializable {
 //                            After click load button for load all
 //
                             try {
-                                Boolean isCompTaskAdded = DashboardController.getInstance().addCompletedTask(task.getId(), task.getUserId(), currentDate, currentTime);
+                                Boolean isCompTaskAdded = DashboardController.getInstance().addCompletedTask(
+                                        task.getId(),
+                                        task.getUserId(),
+                                        Date.valueOf(LocalDate.now()),
+                                        currentTime);
+
                                 if (isCompTaskAdded) {
                                     Boolean isTaskRemoved = DashboardController.getInstance().removeTask(task.getId(), task.getUserId());
                                     if (isTaskRemoved) {
@@ -276,7 +286,7 @@ public class DashboardFormController implements Initializable {
                                 return;
                             }
                         } catch (Exception e) {
-                            Notifications.create().title("Failed").text("Operation Failed try again !" +e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                            Notifications.create().title("Failed").text("Operation Failed try again !" + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                         }
                     });
                 }
@@ -329,7 +339,7 @@ public class DashboardFormController implements Initializable {
                     hBox.setSpacing(15);
                     hBox.setAlignment(Pos.CENTER_LEFT);
 
-                    String taskDate = compTask.getDate();
+                    String taskDate = compTask.getDate().toString();
                     if (taskDate != null && !taskDate.isEmpty()) {
                         Label dateLabel = new Label("Date : " + taskDate);
                         dateLabel.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #333333;");
@@ -411,7 +421,7 @@ public class DashboardFormController implements Initializable {
                                 Notifications.create().title("Error").text("Failed to delete completed task!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                             }
                         } catch (Exception e) {
-                            Notifications.create().title("Error").text("An error occurred :"+e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                            Notifications.create().title("Error").text("An error occurred :" + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                         }
                     });
 
@@ -428,7 +438,7 @@ public class DashboardFormController implements Initializable {
         loadDashBoard();
     }
 
-    private void clearTextField(){
+    private void clearTextField() {
         txtTaskNameField.setText("");
         txtTaskDescriptionField.setText("");
         txtDate.setValue(null);

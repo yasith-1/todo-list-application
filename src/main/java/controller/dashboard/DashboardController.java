@@ -3,7 +3,6 @@ package controller.dashboard;
 import database.DBconnection;
 import model.CompletedTask;
 import model.Task;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -42,7 +41,7 @@ public class DashboardController {
             ps.setString(1, genarateTaskId());
             ps.setString(2, task.getName());
             ps.setString(3, task.getDescription());
-            ps.setString(4, task.getDate());
+            ps.setDate(4, task.getDate());
             ps.setString(5, task.getTime());
             ps.setInt(6, task.getStatusId());
             ps.setString(7, userId);
@@ -77,7 +76,7 @@ public class DashboardController {
                         rst.getString("task_id"),
                         rst.getString("name"),
                         rst.getString("description"),
-                        rst.getString("date"),
+                        rst.getDate("date"),
                         rst.getString("time"),
                         rst.getInt("status_id"),
                         rst.getString("user_id")
@@ -98,7 +97,7 @@ public class DashboardController {
                         rst.getString("comptask_id"),
                         rst.getString("name"),
                         rst.getString("description"),
-                        rst.getString("date"),
+                        rst.getDate("date"),
                         rst.getString("time"),
                         rst.getString("user_id"),
                         rst.getInt("status_id")
@@ -110,7 +109,7 @@ public class DashboardController {
         }
     }
 
-    public Boolean addCompletedTask(String completedTaskId, String userId, String CompleteDdate, String CompletedTime) throws SQLException {
+    public Boolean addCompletedTask(String completedTaskId, String userId, Date CompleteDdate, String CompletedTime) throws SQLException {
         String query = "SELECT * FROM `task` WHERE `user_id`='" + userId + "' AND `task_id`='" + completedTaskId + "'";
         ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery(query);
 
@@ -133,7 +132,7 @@ public class DashboardController {
         pst.setString(1, compTask.getId());
         pst.setString(2, compTask.getName());
         pst.setString(3, compTask.getDescription());
-        pst.setString(4, compTask.getDate());
+        pst.setObject(4, compTask.getDate());
         pst.setString(5, compTask.getTime());
         pst.setString(6, compTask.getUserId());
         pst.setInt(7, compTask.getStatusId());

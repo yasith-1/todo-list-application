@@ -14,43 +14,43 @@
 
 <AnchorPane prefHeight="635.0" prefWidth="1105.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dashboard.DashboardFormController">
     <children>
-        <Rectangle fill="#5f6365" height="635.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="316.0" />
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#00000030" height="35.0" layoutX="17.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
-        <Label fx:id="dateTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Loging time :" textFill="WHITE">
+        <Rectangle fill="#273c73" height="635.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="328.0" />
+        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#192a5630" height="35.0" layoutX="15.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
+        <Label fx:id="dateTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="17.0" prefHeight="17.0" prefWidth="200.0" text="Loging time :" textFill="WHITE">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-        <ImageView fitHeight="103.0" fitWidth="112.0" layoutX="101.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="77.0" fitWidth="86.0" layoutX="119.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/avatar.png" />
             </image>
         </ImageView>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#00000025" height="199.0" layoutX="5.0" layoutY="288.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#0000005d" height="35.0" layoutX="13.0" layoutY="226.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="232.0" prefHeight="23.0" prefWidth="270.0" text="Plan your day todo with me !" textFill="#f300fa">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#192a56" height="210.0" layoutX="11.0" layoutY="279.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
+        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#192a54" height="35.0" layoutX="13.0" layoutY="217.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="223.0" prefHeight="23.0" prefWidth="270.0" text="Plan your day todo with me !" textFill="#fcfcfc">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </Label>
         <JFXListView fx:id="todoListView" layoutX="331.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
         <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
-        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="503.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Add Task" textFill="WHITE">
+        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="510.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="289.0" style="-fx-background-radius: 10; -fx-background-color: #05c46b; -fx-cursor: hand;" text="Add Task">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </JFXButton>
-        <JFXTextField fx:id="txtTaskNameField" focusColor="#27ab9c" layoutX="23.0" layoutY="308.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Name" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white; -fx-cursor: hand;" unFocusColor="#dad9d9">
+        <JFXTextField fx:id="txtTaskNameField" focusColor="#27ab9c" layoutX="27.0" layoutY="300.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Name" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white; -fx-cursor: hand;" unFocusColor="#dad9d9">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtTaskDescriptionField" focusColor="#27ab9c" layoutX="23.0" layoutY="364.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Description ( optional )" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white; -fx-cursor: hand;" unFocusColor="#dad9d9">
+        <JFXTextField fx:id="txtTaskDescriptionField" focusColor="#27ab9c" layoutX="27.0" layoutY="368.0" prefHeight="30.0" prefWidth="270.0" promptText="Task Description ( optional )" style="-fx-text-fill: #dfe6e9; -fx-prompt-text-fill: white; -fx-cursor: hand;" unFocusColor="#dad9d9">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </JFXTextField>
-        <DatePicker fx:id="txtDate" layoutX="22.0" layoutY="425.0" prefHeight="33.0" prefWidth="270.0" promptText="Select Due date" />
+        <DatePicker fx:id="txtDate" layoutX="27.0" layoutY="432.0" prefHeight="33.0" prefWidth="270.0" promptText="Select Due date" />
         <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="331.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
         <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="717.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="418.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="TODO">
@@ -63,17 +63,17 @@
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="564.0" onAction="#loadTaskOnActionButton" prefHeight="44.0" prefWidth="132.0" style="-fx-background-radius: 20; -fx-background-color: #78e08f; -fx-text-fill: black; -fx-cursor: hand;" text="Load Task" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="567.0" onAction="#loadTaskOnActionButton" prefHeight="44.0" prefWidth="139.0" style="-fx-background-radius: 10; -fx-background-color: #808e9b; -fx-text-fill: black; -fx-cursor: hand;" text="Load Task" textFill="WHITE">
          <font>
             <Font name="Poppins Regular" size="16.0" />
          </font>
       </JFXButton>
-        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="182.0" prefHeight="17.0" prefWidth="200.0" style="-fx-font-weight: 900;" text="Name" textFill="WHITE">
+        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="163.0" prefHeight="17.0" prefWidth="200.0" style="-fx-font-weight: 900;" text="Name" textFill="WHITE">
             <font>
                 <Font name="Poppins Bold" size="17.0" />
             </font>
         </Label>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="564.0" onAction="#logOutOnActionButton" prefHeight="44.0" prefWidth="125.0" style="-fx-background-radius: 20; -fx-background-color: #eb2f06; -fx-text-fill: white; -fx-cursor: hand;" text="Logout" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="567.0" onAction="#logOutOnActionButton" prefHeight="44.0" prefWidth="139.0" style="-fx-background-radius: 10; -fx-background-color: #eb2f06; -fx-text-fill: white; -fx-cursor: hand;" text="Logout" textFill="WHITE">
          <font>
             <Font name="Poppins Regular" size="16.0" />
          </font>

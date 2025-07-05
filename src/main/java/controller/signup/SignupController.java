@@ -4,7 +4,6 @@ import database.DBconnection;
 import model.User;
 import util.CrudUtil;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
