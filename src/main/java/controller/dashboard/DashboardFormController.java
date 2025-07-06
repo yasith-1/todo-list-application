@@ -42,11 +42,8 @@ public class DashboardFormController implements Initializable {
     @FXML
     private Label dateTimeLabel;
 
-    //    String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
-    //    String currentDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd - HH:mm:ss");
 
-    //    Date and time----------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setUserName();
@@ -92,8 +89,7 @@ public class DashboardFormController implements Initializable {
                 clearTextField();
                 loadDashBoard();
             } else {
-                Notifications.create().title("Warning").text("Error").position(Pos.BOTTOM_RIGHT).showInformation();
-                return;
+                Notifications.create().title("Warning").text("Task not added").position(Pos.BOTTOM_RIGHT).showInformation();
             }
         }
     }
@@ -332,9 +328,9 @@ public class DashboardFormController implements Initializable {
                     }
 
 
-                    String taskStatus = String.valueOf(compTask.getStatusId());
+                    String taskStatus = String.valueOf(compTask.getStatus());
                     if (taskStatus != null && !taskStatus.isEmpty()) {
-                        Label dateLabel = new Label("Task Status : " + (Integer.parseInt(taskStatus) == 2 ? "Completed" : "Pending"));
+                        Label dateLabel = new Label("Task Status : " + (Integer.parseInt(taskStatus) == 2 ? "COMPLETED" : "PENDING"));
                         dateLabel.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #333333;");
                         hBox.getChildren().add(dateLabel);
                     }
@@ -394,7 +390,7 @@ public class DashboardFormController implements Initializable {
                     vBox.getChildren().add(deleteButton);
                     doneListView.getItems().add(vBox);
 
-// Delete logic
+                    // Delete logic
                     deleteButton.setOnAction(evt -> {
                         try {
                             Boolean isDeleted = DashboardController.getInstance().removeTask(compTask.getId(), compTask.getUserId());

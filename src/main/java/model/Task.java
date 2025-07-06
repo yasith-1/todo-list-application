@@ -16,7 +16,7 @@ public class Task {
     private String description;
     private Date date;
     private Time time;
-    private TaskStatus statusId;
+    private TaskStatus status;
     private String userId;
 
 }

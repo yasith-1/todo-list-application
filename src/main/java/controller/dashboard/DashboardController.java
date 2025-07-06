@@ -37,18 +37,19 @@ public class DashboardController {
     public Boolean saveTaskDatabase(Task task) {
         try {
             Boolean result = CrudUtil.execute("INSERT INTO `task` (`task_id`,`name`,`description`,`date`,`time`," +
-                            "`status_id`,`user_id`) VALUES (?, ?, ?, ?, ?, ?,?)",
+                            "`status`,`user_id`) VALUES (?, ?, ?, ?, ?, ?,?)",
                     genarateTaskId(),
                     task.getName(),
                     task.getDescription(),
                     task.getDate(),
                     task.getTime(),
-                    task.getStatusId(),
+                    task.getStatus().name(),
                     userId);
 
             return result;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error while saving task: " + e.getMessage());
+            return null;
         }
     }
 
@@ -69,7 +70,8 @@ public class DashboardController {
     public ArrayList<Task> loadTask() {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         try {
-            ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM task WHERE user_id='" + userId + "'");
+//            ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM task WHERE user_id='" + userId + "'");
+            ResultSet rst= CrudUtil.execute("SELECT * FROM `task` WHERE user_id=?", userId);
             while (rst.next()) {
                 taskArrayList.add(new Task(
                         rst.getString("task_id"),
@@ -77,7 +79,7 @@ public class DashboardController {
                         rst.getString("description"),
                         rst.getDate("date"),
                         rst.getTime("time"),
-                        (TaskStatus) rst.getObject("status_id"),
+                        (TaskStatus) rst.getObject("status"),
                         rst.getString("user_id")
                 ));
             }
@@ -90,8 +92,7 @@ public class DashboardController {
     public ArrayList<Task> loadCompletedTask() {
         ArrayList<Task> compTaskArrayList = new ArrayList<>();
         try {
-//            ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM `completedtask` WHERE user_id='" + userId + "'");
-            ResultSet rst = CrudUtil.execute("SELECT * FROM `task` WHERE user_id=? AND status_id=?", userId, TaskStatus.COMPLETED);
+            ResultSet rst = CrudUtil.execute("SELECT * FROM `task` WHERE user_id=? AND status=?", userId, TaskStatus.COMPLETED);
             while (rst.next()) {
                 compTaskArrayList.add(new Task(
                         rst.getString("task_id"),
@@ -99,7 +100,7 @@ public class DashboardController {
                         rst.getString("description"),
                         rst.getDate("date"),
                         rst.getTime("time"),
-                        (TaskStatus) rst.getObject("status_id"),
+                        (TaskStatus) rst.getObject("status"),
                         rst.getString("user_id")
                 ));
             }
@@ -137,7 +138,7 @@ public class DashboardController {
                 compTask.getDescription(),
                 compTask.getDate(),
                 compTask.getTime(),
-                compTask.getStatusId(),
+                compTask.getStatus().name(),
                 compTask.getUserId());
 
         return result;
