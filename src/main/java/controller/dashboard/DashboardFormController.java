@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -283,6 +284,8 @@ public class DashboardFormController implements Initializable {
     //    Load completed task method---------------------------------------------------------------------------------------
     private void loadCompletedTask() {
         try {
+            doneListView.getItems().clear(); // Clear old list
+
             ArrayList<Task> compTaskArrayList = DashboardController.getInstance().loadCompletedTask();
 
             if (compTaskArrayList == null || compTaskArrayList.isEmpty()) {
@@ -296,7 +299,6 @@ public class DashboardFormController implements Initializable {
             }
 
             for (Task compTask : compTaskArrayList) {
-                // Main container - VBox
                 VBox vBox = new VBox();
                 vBox.setSpacing(8);
                 vBox.setStyle("-fx-background-color: linear-gradient(to right, #FAD0C4, #FFD1DC); " +
@@ -307,7 +309,6 @@ public class DashboardFormController implements Initializable {
                         "-fx-padding: 15; " +
                         "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
 
-                // Task Name
                 Label taskNameLabel = new Label("Task : " + compTask.getName());
                 taskNameLabel.setStyle("-fx-font-size: 16px; " +
                         "-fx-font-family: 'Poppins'; " +
@@ -315,31 +316,26 @@ public class DashboardFormController implements Initializable {
                         "-fx-text-fill: #333333; " +
                         "-fx-wrap-text: true;");
 
-                // HBox for Date and Status
                 HBox hBox = new HBox();
                 hBox.setSpacing(15);
                 hBox.setAlignment(Pos.CENTER_LEFT);
 
-                // Date
                 if (compTask.getDate() != null) {
                     Label dateLabel = new Label("Date : " + compTask.getDate().toString());
                     dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #333333;");
                     hBox.getChildren().add(dateLabel);
                 }
 
-                // Status (always COMPLETED in this case)
                 Label statusLabel = new Label("Task Status : COMPLETED");
                 statusLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #333333;");
                 hBox.getChildren().add(statusLabel);
 
-                // Time
                 Label taskTimeLabel = new Label("Task time : " + compTask.getTime());
                 taskTimeLabel.setStyle("-fx-font-size: 14px; " +
                         "-fx-font-weight: normal; " +
                         "-fx-text-fill: #333333; " +
                         "-fx-wrap-text: true;");
 
-                // Description
                 if (compTask.getDescription() != null && !compTask.getDescription().equalsIgnoreCase("null") && !compTask.getDescription().isEmpty()) {
                     Label descriptionLabel = new Label("Description: " + compTask.getDescription());
                     descriptionLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #666666; -fx-wrap-text: true; -fx-font-style: italic;");
@@ -347,6 +343,11 @@ public class DashboardFormController implements Initializable {
                 } else {
                     vBox.getChildren().addAll(taskNameLabel, hBox, taskTimeLabel);
                 }
+
+                // HBox for buttons
+                HBox buttonBox = new HBox();
+                buttonBox.setSpacing(10);
+                buttonBox.setPadding(new Insets(10, 0, 0, 0));
 
                 // Delete Button
                 Button deleteButton = new Button("Delete");
@@ -375,41 +376,70 @@ public class DashboardFormController implements Initializable {
                                 "-fx-background-radius: 20; " +
                                 "-fx-cursor: hand;"));
 
-                // Delete logic
+                // Mark as Pending Button
+                Button markPendingButton = new Button("Mark as Pending");
+                markPendingButton.setStyle("-fx-background-color: #2ecc71; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-padding: 8 18 8 18; " +
+                        "-fx-background-radius: 20; " +
+                        "-fx-cursor: hand;");
+                markPendingButton.setOnMouseEntered(e -> markPendingButton.setStyle(
+                        "-fx-background-color: #27ae60; " +
+                                "-fx-text-fill: white; " +
+                                "-fx-font-size: 13px; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-padding: 8 18 8 18; " +
+                                "-fx-background-radius: 20; " +
+                                "-fx-cursor: hand;" +
+                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"));
+                markPendingButton.setOnMouseExited(e -> markPendingButton.setStyle(
+                        "-fx-background-color: #2ecc71; " +
+                                "-fx-text-fill: white; " +
+                                "-fx-font-size: 13px; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-padding: 8 18 8 18; " +
+                                "-fx-background-radius: 20; " +
+                                "-fx-cursor: hand;"));
+
+                // Delete Logic
                 deleteButton.setOnAction(evt -> {
                     try {
-                        deleteButton.setDisable(true); // Optional: prevent double clicks
+                        deleteButton.setDisable(true);
                         Boolean isDeleted = DashboardController.getInstance().removeTask(compTask.getId(), compTask.getUserId());
                         if (isDeleted) {
                             doneListView.getItems().remove(vBox);
                             loadDashBoard();
-                            Notifications.create()
-                                    .title("Success")
-                                    .text("Completed task deleted successfully!")
-                                    .position(Pos.BOTTOM_RIGHT)
-                                    .hideAfter(Duration.seconds(5))
-                                    .showInformation();
+                            Notifications.create().title("Success").text("Completed Task deleted successfully!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
                         } else {
                             deleteButton.setDisable(false);
-                            Notifications.create()
-                                    .title("Error")
-                                    .text("Failed to delete completed task!")
-                                    .position(Pos.BOTTOM_RIGHT)
-                                    .hideAfter(Duration.seconds(5))
-                                    .showError();
+                            Notifications.create().title("Error").text("Failed to delete completed task!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                         }
                     } catch (Exception e) {
                         deleteButton.setDisable(false);
-                        Notifications.create()
-                                .title("Error")
-                                .text("An error occurred: " + e.getMessage())
-                                .position(Pos.BOTTOM_RIGHT)
-                                .hideAfter(Duration.seconds(5))
-                                .showError();
+                        Notifications.create().title("Error").text("An error occurred: " + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
                     }
                 });
 
-                vBox.getChildren().add(deleteButton);
+                // Mark as Pending Logic (you must implement markTaskAsPending in your controller)
+                markPendingButton.setOnAction(evt -> {
+                    try {
+                        boolean updated = DashboardController.getInstance().markTaskAsPending(compTask.getId(),compTask.getUserId());
+                        if (updated) {
+                            doneListView.getItems().remove(vBox);
+                            loadDashBoard();
+                            Notifications.create().title("Task Updated").text("Task marked as pending!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
+                        } else {
+                            Notifications.create().title("Error").text("Failed to update task!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                        }
+                    } catch (Exception e) {
+                        Notifications.create().title("Error").text("An error occurred: " + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                    }
+                });
+
+                buttonBox.getChildren().addAll(deleteButton, markPendingButton);
+                vBox.getChildren().add(buttonBox);
                 doneListView.getItems().add(vBox);
             }
 

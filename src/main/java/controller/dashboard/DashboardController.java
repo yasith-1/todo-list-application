@@ -147,6 +147,14 @@ public class DashboardController {
         Statement statement = DBconnection.getInstance().getConnection().createStatement();
         return statement.executeUpdate(query) > 0;
     }
+
+    public boolean markTaskAsPending(String id, String userId) throws SQLException {
+        Boolean result = CrudUtil.execute(
+                "UPDATE `task` SET `status` = ? WHERE `task_id` = ? AND `user_id` = ?",
+                TaskStatus.PENDING.name(),
+                id, userId);
+        return result;
+    }
 //
 //    public Boolean removeCompletedTask(String taskId, String userId) throws SQLException {
 //        String query = "DELETE FROM `completedtask` WHERE `comptask_id`='" + taskId + "' AND `user_id`='" + userId + "'";
