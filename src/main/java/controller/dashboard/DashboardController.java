@@ -4,7 +4,6 @@ import database.DBconnection;
 import model.Task;
 import util.CrudUtil;
 import util.TaskStatus;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -48,8 +47,7 @@ public class DashboardController {
 
             return result;
         } catch (SQLException e) {
-            System.out.println("Error while saving task: " + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
@@ -70,8 +68,8 @@ public class DashboardController {
     public ArrayList<Task> loadTask() {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         try {
-//            ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery("SELECT * FROM task WHERE user_id='" + userId + "'");
-            ResultSet rst= CrudUtil.execute("SELECT * FROM `task` WHERE user_id=?", userId);
+            ResultSet rst= CrudUtil.execute("SELECT * FROM `task` WHERE user_id=? AND  `status`=?",
+                    userId, TaskStatus.PENDING.name());
             while (rst.next()) {
                 taskArrayList.add(new Task(
                         rst.getString("task_id"),
@@ -79,7 +77,7 @@ public class DashboardController {
                         rst.getString("description"),
                         rst.getDate("date"),
                         rst.getTime("time"),
-                        (TaskStatus) rst.getObject("status"),
+                        TaskStatus.valueOf(rst.getString("status")),
                         rst.getString("user_id")
                 ));
             }
@@ -92,7 +90,12 @@ public class DashboardController {
     public ArrayList<Task> loadCompletedTask() {
         ArrayList<Task> compTaskArrayList = new ArrayList<>();
         try {
-            ResultSet rst = CrudUtil.execute("SELECT * FROM `task` WHERE user_id=? AND status=?", userId, TaskStatus.COMPLETED);
+            ResultSet rst = CrudUtil.execute(
+                    "SELECT * FROM `task` WHERE `user_id`=? AND `status`=?",
+                    userId,
+                    TaskStatus.COMPLETED.name()
+            );
+
             while (rst.next()) {
                 compTaskArrayList.add(new Task(
                         rst.getString("task_id"),
@@ -100,10 +103,11 @@ public class DashboardController {
                         rst.getString("description"),
                         rst.getDate("date"),
                         rst.getTime("time"),
-                        (TaskStatus) rst.getObject("status"),
+                        TaskStatus.valueOf(rst.getString("status")),
                         rst.getString("user_id")
                 ));
             }
+
             return compTaskArrayList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -113,9 +117,6 @@ public class DashboardController {
     public Boolean addCompletedTask(String completedTaskId, String userId, Date CompleteDdate, Time CompletedTime) throws SQLException {
 
         ResultSet rst = CrudUtil.execute("SELECT * FROM `task` WHERE `user_id`= ? AND `task_id`=?", userId, completedTaskId);
-
-//        String query = "SELECT * FROM `task` WHERE `user_id`='" + userId + "' AND `task_id`='" + completedTaskId + "'";
-//        ResultSet rst = DBconnection.getInstance().getConnection().createStatement().executeQuery(query);
 
         while (rst.next()) {
             String taskId = rst.getString("task_id");
@@ -131,18 +132,15 @@ public class DashboardController {
     }
 
     public Boolean addCompletedTask(Task compTask) throws SQLException {
-//        String query = "INSERT INTO `task` VALUES(?,?,?,?,?,?,?)";
-        Boolean result = CrudUtil.execute("INSERT INTO `task` VALUES(?,?,?,?,?,?,?)",
-                compTask.getId(),
-                compTask.getName(),
-                compTask.getDescription(),
-                compTask.getDate(),
-                compTask.getTime(),
+        Boolean result = CrudUtil.execute(
+                "UPDATE `task` SET `status` = ? WHERE `task_id` = ? AND `user_id` = ?",
                 compTask.getStatus().name(),
-                compTask.getUserId());
-
+                compTask.getId(),
+                compTask.getUserId()
+        );
         return result;
     }
+
 
     public Boolean removeTask(String taskId, String userId) throws SQLException {
         String query = "DELETE FROM `task` WHERE `task_id`='" + taskId + "' AND `user_id`='" + userId + "'";

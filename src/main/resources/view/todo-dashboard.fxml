@@ -12,9 +12,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="1105.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dashboard.DashboardFormController">
+<AnchorPane prefHeight="686.0" prefWidth="1105.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dashboard.DashboardFormController">
     <children>
-        <Rectangle fill="#273c73" height="635.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="328.0" />
+        <Rectangle fill="#273c73" height="686.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="328.0" />
         <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#192a5630" height="35.0" layoutX="15.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
         <Label fx:id="dateTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="17.0" prefHeight="17.0" prefWidth="200.0" text="Loging time :" textFill="WHITE">
             <font>
@@ -33,9 +33,9 @@
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </Label>
-        <JFXListView fx:id="todoListView" layoutX="331.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
-        <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="564.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
-        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="510.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="289.0" style="-fx-background-radius: 10; -fx-background-color: #05c46b; -fx-cursor: hand;" text="Add Task">
+        <JFXListView fx:id="todoListView" layoutX="332.0" layoutY="63.0" prefHeight="606.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
+        <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="606.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
+        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="548.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="289.0" style="-fx-background-radius: 10; -fx-background-color: #05c46b; -fx-cursor: hand;" text="Add Task">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
@@ -51,19 +51,19 @@
             </font>
         </JFXTextField>
         <DatePicker fx:id="txtDate" layoutX="27.0" layoutY="432.0" prefHeight="33.0" prefWidth="270.0" promptText="Select Due date" />
-        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="331.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
-        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="717.0" layoutY="9.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="373.0" />
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="418.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="TODO">
+        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="342.0" layoutY="10.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="354.0" />
+        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#00000025" height="44.0" layoutX="727.0" layoutY="11.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="354.0" />
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="419.0" layoutY="21.0" prefHeight="17.0" prefWidth="200.0" text="TODO">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="804.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Completed task">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="804.0" layoutY="22.0" prefHeight="17.0" prefWidth="200.0" text="Completed task">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="567.0" onAction="#loadTaskOnActionButton" prefHeight="44.0" prefWidth="139.0" style="-fx-background-radius: 10; -fx-background-color: #808e9b; -fx-text-fill: black; -fx-cursor: hand;" text="Load Task" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="605.0" onAction="#loadTaskOnActionButton" prefHeight="44.0" prefWidth="139.0" style="-fx-background-radius: 10; -fx-background-color: #808e9b; -fx-text-fill: black; -fx-cursor: hand;" text="Load Task" textFill="WHITE">
          <font>
             <Font name="Poppins Regular" size="16.0" />
          </font>
@@ -73,7 +73,7 @@
                 <Font name="Poppins Bold" size="17.0" />
             </font>
         </Label>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="567.0" onAction="#logOutOnActionButton" prefHeight="44.0" prefWidth="139.0" style="-fx-background-radius: 10; -fx-background-color: #eb2f06; -fx-text-fill: white; -fx-cursor: hand;" text="Logout" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="605.0" onAction="#logOutOnActionButton" prefHeight="44.0" prefWidth="139.0" style="-fx-background-radius: 10; -fx-background-color: #eb2f06; -fx-text-fill: white; -fx-cursor: hand;" text="Logout" textFill="WHITE">
          <font>
             <Font name="Poppins Regular" size="16.0" />
          </font>

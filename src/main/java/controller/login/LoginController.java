@@ -2,7 +2,6 @@ package controller.login;
 
 import controller.dashboard.DashboardController;
 import database.DBconnection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
