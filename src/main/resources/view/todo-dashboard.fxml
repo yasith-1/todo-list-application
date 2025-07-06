@@ -26,8 +26,8 @@
                 <Image url="@../images/avatar.png" />
             </image>
         </ImageView>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#192a56" height="210.0" layoutX="11.0" layoutY="279.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#192a54" height="35.0" layoutX="13.0" layoutY="217.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#192a5470" height="210.0" layoutX="11.0" layoutY="279.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
+        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#182a5270" height="35.0" layoutX="13.0" layoutY="217.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="223.0" prefHeight="23.0" prefWidth="270.0" text="Plan your day todo with me !" textFill="#fcfcfc">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
@@ -58,7 +58,7 @@
                 <Font name="Poppins Regular" size="16.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="804.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Completed">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="804.0" layoutY="20.0" prefHeight="17.0" prefWidth="200.0" text="Completed task">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>

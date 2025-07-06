@@ -16,13 +16,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.CompletedTask;
 import model.Task;
 import org.controlsfx.control.Notifications;
+import util.TaskStatus;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -41,7 +42,7 @@ public class DashboardFormController implements Initializable {
     @FXML
     private Label dateTimeLabel;
 
-    String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
+    //    String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
     //    String currentDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd - HH:mm:ss");
 
@@ -82,8 +83,8 @@ public class DashboardFormController implements Initializable {
                     txtTaskNameField.getText(),
                     txtTaskDescriptionField.getText().isEmpty() ? "null" : txtTaskDescriptionField.getText(),
                     Date.valueOf(txtDate.getValue()),
-                    currentTime,
-                    1,
+                    Time.valueOf(LocalTime.now()),
+                    TaskStatus.PENDING,
                     null);
             Boolean isAdded = DashboardController.getInstance().saveTaskDatabase(task);
             if (isAdded) {
@@ -226,46 +227,30 @@ public class DashboardFormController implements Initializable {
                     // Checkbox action logic
                     checkBox.setOnAction(actionEvent -> {
                         if (checkBox.isSelected()) {
-//                            First complete task insert to database table
-//                            After delete that record from task table
-//                            After that record move to completed task side
-//                            After click load button for load all
-//
                             try {
                                 Boolean isCompTaskAdded = DashboardController.getInstance().addCompletedTask(
                                         task.getId(),
                                         task.getUserId(),
                                         Date.valueOf(LocalDate.now()),
-                                        currentTime);
+                                        Time.valueOf(LocalTime.now()));
 
                                 if (isCompTaskAdded) {
-                                    Boolean isTaskRemoved = DashboardController.getInstance().removeTask(task.getId(), task.getUserId());
-                                    if (isTaskRemoved) {
-                                        loadDashBoard();
-                                        todoListView.getItems().remove(vBox);
-                                        Notifications.create().title("Marked").
-                                                text("Marked Task as completed !").
-                                                position(Pos.BOTTOM_RIGHT).
-                                                hideAfter(Duration.seconds(5)).
-                                                showInformation();
-                                        return;
-                                    } else {
-                                        new Alert(Alert.AlertType.ERROR, "Technical issue please try again !").show();
-                                        Notifications.create().title("Incomplete Remove").
-                                                text("Operation not completed try again !").
-                                                position(Pos.BOTTOM_RIGHT).
-                                                hideAfter(Duration.seconds(5)).
-                                                showWarning();
-                                        return;
-                                    }
+//                                    Boolean isTaskRemoved = DashboardController.getInstance().removeTask(task.getId(), task.getUserId());
 
-                                } else {
-                                    Notifications.create().title("Not Marked").
-                                            text("Task not marked !").
+                                    loadDashBoard();
+                                    todoListView.getItems().remove(vBox);
+                                    Notifications.create().title("Marked").
+                                            text("Task completed !").
                                             position(Pos.BOTTOM_RIGHT).
                                             hideAfter(Duration.seconds(5)).
-                                            showError();
-                                    return;
+                                            showInformation();
+
+                                } else {
+                                    Notifications.create().title("Marked").
+                                            text("Task not completed !").
+                                            position(Pos.BOTTOM_RIGHT).
+                                            hideAfter(Duration.seconds(5)).
+                                            showInformation();
                                 }
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
@@ -302,7 +287,7 @@ public class DashboardFormController implements Initializable {
     //    Load completed task method---------------------------------------------------------------------------------------
     private void loadCompletedTask() {
         try {
-            ArrayList<CompletedTask> compTaskArrayList = DashboardController.getInstance().loadCompletedTask();
+            ArrayList<Task> compTaskArrayList = DashboardController.getInstance().loadCompletedTask();
 
             if (compTaskArrayList == null || compTaskArrayList.isEmpty()) {
                 Notifications.create().
@@ -313,7 +298,7 @@ public class DashboardFormController implements Initializable {
                         showWarning();
                 return;
             } else {
-                for (CompletedTask compTask : compTaskArrayList) {
+                for (Task compTask : compTaskArrayList) {
 
                     // Main container - VBox for vertical layout
                     VBox vBox = new VBox();
@@ -412,7 +397,7 @@ public class DashboardFormController implements Initializable {
 // Delete logic
                     deleteButton.setOnAction(evt -> {
                         try {
-                            Boolean isDeleted = DashboardController.getInstance().removeCompletedTask(compTask.getId(), compTask.getUserId());
+                            Boolean isDeleted = DashboardController.getInstance().removeTask(compTask.getId(), compTask.getUserId());
                             if (isDeleted) {
                                 doneListView.getItems().remove(vBox);
                                 loadDashBoard();

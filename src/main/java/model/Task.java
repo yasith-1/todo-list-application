@@ -1,7 +1,9 @@
 package model;
 
 import lombok.*;
+import util.TaskStatus;
 import java.sql.Date;
+import java.sql.Time;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +15,8 @@ public class Task {
     private String name;
     private String description;
     private Date date;
-    private String time;
-    private Integer statusId;
+    private Time time;
+    private TaskStatus statusId;
     private String userId;
 
 }
