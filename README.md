@@ -26,6 +26,8 @@ A comprehensive **Library Management System** built with JavaFX that provides co
 
 </br>
 
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -52,6 +54,8 @@ A comprehensive **Library Management System** built with JavaFX that provides co
    mvn clean install
    ```
 
+</br>
+
 ---
 
 ## 🔄️ Dependencies
@@ -63,7 +67,9 @@ A comprehensive **Library Management System** built with JavaFX that provides co
 - controlsfx
 - lombok
 - modelmapper
-- 
+
+</br>
+  
 ---
 
 ## ♻️ Build Plugin
@@ -104,6 +110,10 @@ A comprehensive **Library Management System** built with JavaFX that provides co
         </plugins>
    ```
 
+</br>
+
+---
+
 ## 🛠️ Technology Stack
 
 <div align="center">
@@ -116,6 +126,9 @@ A comprehensive **Library Management System** built with JavaFX that provides co
 | ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white) | Build Tool | 3.6+ |
 
 </div>
+
+
+</br>
 
 ---
 
@@ -150,6 +163,8 @@ A comprehensive **Library Management System** built with JavaFX that provides co
 
 </div>
 
+</br>
+
 ---
 
 ## 🏗️ Project Structure
@@ -182,6 +197,8 @@ todo-list-application/
         └── user-signup.fxml
 ```
 
+</br>
+
 ---
 
 ## 🎯 Usage
@@ -205,13 +222,18 @@ todo-list-application/
 - Use the intuitive GUI to navigate between login, signup, and dashboard
 - Visual feedback through the alert system
 
+</br>
+
 ---
 
 ## 🛡️ Security Features
 
-🔒 Password encryption for user accounts
-✅ Input validation and sanitization
-🛡️ SQL injection prevention through prepared statements
+- 🔒 Password encryption for user accounts
+- ✅ Input validation and sanitization
+- 🛡️ SQL injection prevention through prepared statements
+
+
+</br>
 
 ---
 
@@ -228,6 +250,8 @@ todo-list-application/
 </div>
 
 ---
+
+</br>
 
 ## 🙏 Acknowledgments
 
