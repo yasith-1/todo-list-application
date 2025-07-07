@@ -52,7 +52,7 @@
       </Label>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="104.0" layoutY="412.0" prefHeight="37.0" prefWidth="171.0" text="Welcome !" textFill="#0a3d62">
          <font>
-            <Font name="Poppins Bold" size="24.0" />
+            <Font name="Poppins Bold" size="25.0" />
          </font>
       </Label>
       <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="395.0" onAction="#signupOnActionButton" prefHeight="37.0" prefWidth="291.0" style="-fx-background-radius: 10; -fx-background-color: #3c6382; -fx-cursor: hand;" text="Don't have an account ? signup here" textFill="WHITE">

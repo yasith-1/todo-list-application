@@ -10,64 +10,66 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="476.0" prefWidth="835.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.signup.SignupFormController">
    <children>
-      <Rectangle fill="#5f6365" height="476.0" layoutX="-12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="476.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#b2bec3" height="440.0" layoutX="24.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="424.0" />
-      <ImageView fitHeight="381.0" fitWidth="372.0" layoutX="50.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle fill="WHITE" height="476.0" layoutX="-12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="453.0" />
+      <ImageView fitHeight="395.0" fitWidth="396.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Mobile%20login.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="69.0" fitWidth="72.0" layoutX="522.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="530.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/lock.png" />
          </image>
       </ImageView>
-      <Label layoutX="606.0" layoutY="61.0" text="USER Signup">
+      <Label layoutX="590.0" layoutY="43.0" text="USER Signup">
          <font>
             <Font name="Poppins Bold" size="26.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="usernameField" focusColor="#27ab9c" layoutX="504.0" layoutY="247.0" prefHeight="26.0" prefWidth="278.0" promptText="Username" style="-fx-cursor: hand;">
+      <JFXTextField fx:id="usernameField" focusColor="#27ab9c" layoutX="491.0" layoutY="230.0" prefHeight="33.0" prefWidth="291.0" promptText="Username" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="passwordField" focusColor="#27ab9c" layoutX="504.0" layoutY="310.0" prefHeight="26.0" prefWidth="278.0" promptText="Password" style="-fx-cursor: hand;">
+      <JFXPasswordField fx:id="passwordField" focusColor="#27ab9c" layoutX="491.0" layoutY="285.0" prefHeight="33.0" prefWidth="291.0" promptText="Password" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="506.0" layoutY="369.0" onAction="#RegisterOnActionButton" prefHeight="37.0" prefWidth="278.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Register" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="491.0" layoutY="355.0" onAction="#RegisterOnActionButton" prefHeight="37.0" prefWidth="291.0" style="-fx-background-radius: 10; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#bcbbbb45" height="37.0" layoutX="486.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="313.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="501.0" layoutY="137.0" prefHeight="20.0" prefWidth="291.0" text="Make sure your informations are correct." textFill="#402323">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#8a8a8a45" height="37.0" layoutX="487.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="313.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="502.0" layoutY="119.0" prefHeight="20.0" prefWidth="291.0" text="Make sure your informations are correct." textFill="#402323">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="420.0" prefHeight="37.0" prefWidth="313.0" text="Welcome Task Master !" textFill="#0a3d62">
-         <font>
-            <Font name="Poppins Bold" size="24.0" />
-         </font>
-      </Label>
-      <Separator layoutX="493.0" layoutY="106.0" prefHeight="4.0" prefWidth="299.0" style="-fx-background-color: #ced6e0;" />
-      <JFXTextField fx:id="idField" editable="false" focusColor="#27ab9c" layoutX="504.0" layoutY="187.0" prefHeight="26.0" prefWidth="278.0" promptText="User ID" style="-fx-cursor: hand;">
+      <Separator layoutX="496.0" layoutY="89.0" prefHeight="4.0" prefWidth="299.0" style="-fx-background-color: #ced6e0;" />
+      <JFXTextField fx:id="idField" editable="false" focusColor="#27ab9c" layoutX="491.0" layoutY="176.0" prefHeight="33.0" prefWidth="291.0" promptText="User ID" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXTextField>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#0000005b" height="37.0" layoutX="506.0" layoutY="421.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="278.0" />
-      <Text fill="WHITE" layoutX="581.0" layoutY="445.0" onMouseClicked="#backToLoginText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="&lt;-- Back to Login" textAlignment="JUSTIFY">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="421.0" prefHeight="37.0" prefWidth="171.0" text="Welcome !" textFill="#0a3d62">
          <font>
-            <Font name="Poppins Bold" size="15.0" />
+            <Font name="Poppins Bold" size="25.0" />
          </font>
-      </Text>
+      </Label>
+      <ImageView fitHeight="47.0" fitWidth="69.0" layoutX="272.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/welcome.png" />
+         </image>
+      </ImageView>
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="491.0" layoutY="409.0" onAction="#gotoLoginWindowOnActionBtn" prefHeight="37.0" prefWidth="291.0" style="-fx-background-radius: 10; -fx-background-color: #3c6382; -fx-cursor: hand;" text="You already have an account ? Login" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
