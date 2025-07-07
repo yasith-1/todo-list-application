@@ -77,6 +77,7 @@ public class SignupFormController implements Initializable {
 
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user-login.fxml")));
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("Login");
         stage.getIcons().add(new Image("/images/icon.png"));
         stage.show();

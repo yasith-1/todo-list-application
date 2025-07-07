@@ -50,7 +50,6 @@ public class LoginFormController {
         }
     }
 
-
     @FXML
     void signupOnActionButton(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -58,9 +57,8 @@ public class LoginFormController {
 
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/user-signup.fxml"))));
         stage.setTitle("Register");
+        stage.setResizable(false);
         stage.getIcons().add(new Image("/images/icon.png"));
         stage.show();
     }
-
-
 }

@@ -1,5 +1,7 @@
 package controller.dashboard;
 
+import alert.AlertType;
+import alert.Alert;
 import com.jfoenix.controls.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,8 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Task;
-import org.controlsfx.control.Notifications;
 import util.TaskStatus;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -66,30 +68,23 @@ public class TodoDashboardFormController implements Initializable {
     //    Add task button------------------------------------------------------------------------------------
     public void addTaskOnActionButton(ActionEvent actionEvent) {
         if (txtTaskNameField.getText().isEmpty()) {
-            Notifications.create().title("Warning").text("Fill the Task Name field...").position(Pos.BOTTOM_RIGHT).showInformation();
+            Alert.trigger(AlertType.WARNING, "Fill the Task Name field...");
             return;
         } else if (txtDate.getValue() == null) {
-            Notifications.create().title("Warning").text("Select the Task Due Date...").position(Pos.BOTTOM_RIGHT).showInformation();
+            Alert.trigger(AlertType.WARNING, "Select the Task Due Date...");
             return;
         } else if (txtDate.getValue().isBefore(LocalDate.now())) {
-            Notifications.create().title("Warning").text("Select Valid date...").position(Pos.BOTTOM_RIGHT).showInformation();
+            Alert.trigger(AlertType.WARNING, "Select Valid date...");
             return;
         } else {
-            Task task = new Task(
-                    null,
-                    txtTaskNameField.getText(),
-                    txtTaskDescriptionField.getText().isEmpty() ? "null" : txtTaskDescriptionField.getText(),
-                    Date.valueOf(txtDate.getValue()),
-                    Time.valueOf(LocalTime.now()),
-                    TaskStatus.PENDING,
-                    null);
+            Task task = new Task(null, txtTaskNameField.getText(), txtTaskDescriptionField.getText().isEmpty() ? "null" : txtTaskDescriptionField.getText(), Date.valueOf(txtDate.getValue()), Time.valueOf(LocalTime.now()), TaskStatus.PENDING, null);
             Boolean isAdded = TodoDashboardController.getInstance().saveTaskDatabase(task);
             if (isAdded) {
-                Notifications.create().title("Success").text("Task added Successfully !").position(Pos.BOTTOM_RIGHT).showInformation();
+                Alert.trigger(AlertType.INFORMATION, "Task added Successfully !");
                 clearTextField();
                 loadDashBoard();
             } else {
-                Notifications.create().title("Warning").text("Task not added").position(Pos.BOTTOM_RIGHT).showInformation();
+                Alert.trigger(AlertType.ERROR, "Task not added, try again !");
             }
         }
     }
@@ -120,11 +115,7 @@ public class TodoDashboardFormController implements Initializable {
             ArrayList<Task> taskArrayList = TodoDashboardController.getInstance().loadTask();
 
             if (taskArrayList == null || taskArrayList.isEmpty()) {
-                Notifications.create().title("Information").
-                        text("No tasks to display !").
-                        position(Pos.BOTTOM_RIGHT).
-                        hideAfter(Duration.seconds(5)).
-                        showWarning();
+                Alert.trigger(AlertType.WARNING, "No tasks to display !");
                 return;
             } else {
                 for (Task task : taskArrayList) {
@@ -132,21 +123,11 @@ public class TodoDashboardFormController implements Initializable {
                     // Main container - VBox for vertical layout
                     VBox vBox = new VBox();
                     vBox.setSpacing(8);
-                    vBox.setStyle("-fx-background-color: linear-gradient(to right, #A1C4FD, #C2E9FB); " +
-                            "-fx-border-color: #4A90E2; " +
-                            "-fx-border-width: 2px; " +
-                            "-fx-border-radius: 10; " +
-                            "-fx-background-radius: 10; " +
-                            "-fx-padding: 15; " +
-                            "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
+                    vBox.setStyle("-fx-background-color: linear-gradient(to right, #A1C4FD, #C2E9FB); " + "-fx-border-color: #4A90E2; " + "-fx-border-width: 2px; " + "-fx-border-radius: 10; " + "-fx-background-radius: 10; " + "-fx-padding: 15; " + "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
 
                     // Task name
                     Label taskNameLabel = new Label("Task : " + task.getName());
-                    taskNameLabel.setStyle("-fx-font-size: 16px; " +
-                            "-fx-font-family: 'Poppins'; " +
-                            "-fx-font-weight: bold; " +
-                            "-fx-text-fill: #333333; " +
-                            "-fx-wrap-text: true;"); // Enable text wrapping for long task names
+                    taskNameLabel.setStyle("-fx-font-size: 16px; " + "-fx-font-family: 'Poppins'; " + "-fx-font-weight: bold; " + "-fx-text-fill: #333333; " + "-fx-wrap-text: true;"); // Enable text wrapping for long task names
 
                     // HBOX  - Date and Checkbox in HBox
                     HBox hBox = new HBox();
@@ -162,10 +143,7 @@ public class TodoDashboardFormController implements Initializable {
 
                     // Task time
                     Label taskTimeLabel = new Label("Task time : " + task.getTime());
-                    taskTimeLabel.setStyle("-fx-font-size: 14px; " +
-                            "-fx-font-weight: regular; " +
-                            "-fx-text-fill: #333333; " +
-                            "-fx-wrap-text: true;"); // Enable text wrapping for long task names
+                    taskTimeLabel.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: regular; " + "-fx-text-fill: #333333; " + "-fx-wrap-text: true;"); // Enable text wrapping for long task names
 
                     CheckBox checkBox = new CheckBox("Completed");
                     checkBox.setStyle("-fx-font-size: 14px; " + "-fx-text-fill: #444444; " + "-fx-cursor: hand;");
@@ -182,37 +160,12 @@ public class TodoDashboardFormController implements Initializable {
 
                     // Delete Button
                     Button deleteButton = new Button("Delete");
-                    deleteButton.setStyle(
-                            "-fx-background-color: #e74c3c; " +
-                                    "-fx-text-fill: white; " +
-                                    "-fx-font-size: 13px; " +
-                                    "-fx-font-weight: bold; " +
-                                    "-fx-padding: 8 18 8 18; " +
-                                    "-fx-background-radius: 20; " +
-                                    "-fx-cursor: hand;"
-                    );
+                    deleteButton.setStyle("-fx-background-color: #e74c3c; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;");
                     deleteButton.setOnMouseEntered(e -> {
-                        deleteButton.setStyle(
-                                "-fx-background-color: #c0392b; " +
-                                        "-fx-text-fill: white; " +
-                                        "-fx-font-size: 13px; " +
-                                        "-fx-font-weight: bold; " +
-                                        "-fx-padding: 8 18 8 18; " +
-                                        "-fx-background-radius: 20; " +
-                                        "-fx-cursor: hand;" +
-                                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"
-                        );
+                        deleteButton.setStyle("-fx-background-color: #c0392b; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;" + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
                     });
                     deleteButton.setOnMouseExited(e -> {
-                        deleteButton.setStyle(
-                                "-fx-background-color: #e74c3c; " +
-                                        "-fx-text-fill: white; " +
-                                        "-fx-font-size: 13px; " +
-                                        "-fx-font-weight: bold; " +
-                                        "-fx-padding: 8 18 8 18; " +
-                                        "-fx-background-radius: 20; " +
-                                        "-fx-cursor: hand;"
-                        );
+                        deleteButton.setStyle("-fx-background-color: #e74c3c; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;");
                     });
 
                     // Add Delete button
@@ -224,29 +177,17 @@ public class TodoDashboardFormController implements Initializable {
                     checkBox.setOnAction(actionEvent -> {
                         if (checkBox.isSelected()) {
                             try {
-                                Boolean isCompTaskAdded = TodoDashboardController.getInstance().addCompletedTask(
-                                        task.getId(),
-                                        task.getUserId(),
-                                        Date.valueOf(LocalDate.now()),
-                                        Time.valueOf(LocalTime.now()));
+                                Boolean isCompTaskAdded = TodoDashboardController.getInstance().addCompletedTask(task.getId(), task.getUserId(), Date.valueOf(LocalDate.now()), Time.valueOf(LocalTime.now()));
 
                                 if (isCompTaskAdded) {
 //                                    Boolean isTaskRemoved = DashboardController.getInstance().removeTask(task.getId(), task.getUserId());
 
                                     loadDashBoard();
                                     todoListView.getItems().remove(vBox);
-                                    Notifications.create().title("Marked").
-                                            text("Task completed !").
-                                            position(Pos.BOTTOM_RIGHT).
-                                            hideAfter(Duration.seconds(5)).
-                                            showInformation();
+                                    alert.Alert.trigger(AlertType.INFORMATION, "Task marked as completed successfully !");
 
                                 } else {
-                                    Notifications.create().title("Marked").
-                                            text("Task not completed !").
-                                            position(Pos.BOTTOM_RIGHT).
-                                            hideAfter(Duration.seconds(5)).
-                                            showInformation();
+                                    Alert.trigger(AlertType.ERROR, "Task not completed, try again !");
                                 }
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
@@ -261,22 +202,20 @@ public class TodoDashboardFormController implements Initializable {
                             if (isDeleted) {
                                 todoListView.getItems().remove(vBox);
                                 loadDashBoard();
-                                Notifications.create().title("Deleted").text("Task deleted successfully !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
+                                Alert.trigger(AlertType.INFORMATION, "Task deleted successfully !");
                             } else {
-                                Notifications.create().title("Failed Delete").text("Failed to delete task try again !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
-                                return;
+                                Alert.trigger(AlertType.ERROR, "Failed to delete task, try again !");
                             }
                         } catch (Exception e) {
-                            Notifications.create().title("Failed").text("Operation Failed try again !" + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                            Alert.trigger(AlertType.ERROR, "An error occurred while deleting the task");
                         }
                     });
                 }
-
-                Notifications.create().title("Loaded Tasks").text("Task Loaded successfully !").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
+                alert.Alert.trigger(AlertType.INFORMATION, "Tasks loaded successfully !");
             }
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading tasks: " + e.getMessage()).hide();
+            System.out.println("Error loading tasks: " + e.getMessage());
         }
     }
 
@@ -288,32 +227,18 @@ public class TodoDashboardFormController implements Initializable {
             ArrayList<Task> compTaskArrayList = TodoDashboardController.getInstance().loadCompletedTask();
 
             if (compTaskArrayList == null || compTaskArrayList.isEmpty()) {
-                Notifications.create()
-                        .title("Information")
-                        .text("No completed task to display!")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(5))
-                        .showWarning();
+                ;
+                alert.Alert.trigger(AlertType.WARNING, "No completed task to display !");
                 return;
             }
 
             for (Task compTask : compTaskArrayList) {
                 VBox vBox = new VBox();
                 vBox.setSpacing(8);
-                vBox.setStyle("-fx-background-color: linear-gradient(to right, #FAD0C4, #FFD1DC); " +
-                        "-fx-border-color: #FF6F91; " +
-                        "-fx-border-width: 2px; " +
-                        "-fx-border-radius: 10; " +
-                        "-fx-background-radius: 10; " +
-                        "-fx-padding: 15; " +
-                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
+                vBox.setStyle("-fx-background-color: linear-gradient(to right, #FAD0C4, #FFD1DC); " + "-fx-border-color: #FF6F91; " + "-fx-border-width: 2px; " + "-fx-border-radius: 10; " + "-fx-background-radius: 10; " + "-fx-padding: 15; " + "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);");
 
                 Label taskNameLabel = new Label("Task : " + compTask.getName());
-                taskNameLabel.setStyle("-fx-font-size: 16px; " +
-                        "-fx-font-family: 'Poppins'; " +
-                        "-fx-font-weight: bold; " +
-                        "-fx-text-fill: #333333; " +
-                        "-fx-wrap-text: true;");
+                taskNameLabel.setStyle("-fx-font-size: 16px; " + "-fx-font-family: 'Poppins'; " + "-fx-font-weight: bold; " + "-fx-text-fill: #333333; " + "-fx-wrap-text: true;");
 
                 HBox hBox = new HBox();
                 hBox.setSpacing(15);
@@ -330,10 +255,7 @@ public class TodoDashboardFormController implements Initializable {
                 hBox.getChildren().add(statusLabel);
 
                 Label taskTimeLabel = new Label("Task time : " + compTask.getTime());
-                taskTimeLabel.setStyle("-fx-font-size: 14px; " +
-                        "-fx-font-weight: normal; " +
-                        "-fx-text-fill: #333333; " +
-                        "-fx-wrap-text: true;");
+                taskTimeLabel.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: normal; " + "-fx-text-fill: #333333; " + "-fx-wrap-text: true;");
 
                 if (compTask.getDescription() != null && !compTask.getDescription().equalsIgnoreCase("null") && !compTask.getDescription().isEmpty()) {
                     Label descriptionLabel = new Label("Description: " + compTask.getDescription());
@@ -350,57 +272,15 @@ public class TodoDashboardFormController implements Initializable {
 
                 // Delete Button
                 Button deleteButton = new Button("Delete");
-                deleteButton.setStyle("-fx-background-color: #e74c3c; " +
-                        "-fx-text-fill: white; " +
-                        "-fx-font-size: 13px; " +
-                        "-fx-font-weight: bold; " +
-                        "-fx-padding: 8 18 8 18; " +
-                        "-fx-background-radius: 20; " +
-                        "-fx-cursor: hand;");
-                deleteButton.setOnMouseEntered(e -> deleteButton.setStyle(
-                        "-fx-background-color: #c0392b; " +
-                                "-fx-text-fill: white; " +
-                                "-fx-font-size: 13px; " +
-                                "-fx-font-weight: bold; " +
-                                "-fx-padding: 8 18 8 18; " +
-                                "-fx-background-radius: 20; " +
-                                "-fx-cursor: hand;" +
-                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"));
-                deleteButton.setOnMouseExited(e -> deleteButton.setStyle(
-                        "-fx-background-color: #e74c3c; " +
-                                "-fx-text-fill: white; " +
-                                "-fx-font-size: 13px; " +
-                                "-fx-font-weight: bold; " +
-                                "-fx-padding: 8 18 8 18; " +
-                                "-fx-background-radius: 20; " +
-                                "-fx-cursor: hand;"));
+                deleteButton.setStyle("-fx-background-color: #e74c3c; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;");
+                deleteButton.setOnMouseEntered(e -> deleteButton.setStyle("-fx-background-color: #c0392b; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;" + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"));
+                deleteButton.setOnMouseExited(e -> deleteButton.setStyle("-fx-background-color: #e74c3c; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;"));
 
                 // Mark as Pending Button
                 Button markPendingButton = new Button("Mark as Pending");
-                markPendingButton.setStyle("-fx-background-color: #2ecc71; " +
-                        "-fx-text-fill: white; " +
-                        "-fx-font-size: 13px; " +
-                        "-fx-font-weight: bold; " +
-                        "-fx-padding: 8 18 8 18; " +
-                        "-fx-background-radius: 20; " +
-                        "-fx-cursor: hand;");
-                markPendingButton.setOnMouseEntered(e -> markPendingButton.setStyle(
-                        "-fx-background-color: #27ae60; " +
-                                "-fx-text-fill: white; " +
-                                "-fx-font-size: 13px; " +
-                                "-fx-font-weight: bold; " +
-                                "-fx-padding: 8 18 8 18; " +
-                                "-fx-background-radius: 20; " +
-                                "-fx-cursor: hand;" +
-                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"));
-                markPendingButton.setOnMouseExited(e -> markPendingButton.setStyle(
-                        "-fx-background-color: #2ecc71; " +
-                                "-fx-text-fill: white; " +
-                                "-fx-font-size: 13px; " +
-                                "-fx-font-weight: bold; " +
-                                "-fx-padding: 8 18 8 18; " +
-                                "-fx-background-radius: 20; " +
-                                "-fx-cursor: hand;"));
+                markPendingButton.setStyle("-fx-background-color: #2ecc71; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;");
+                markPendingButton.setOnMouseEntered(e -> markPendingButton.setStyle("-fx-background-color: #27ae60; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;" + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"));
+                markPendingButton.setOnMouseExited(e -> markPendingButton.setStyle("-fx-background-color: #2ecc71; " + "-fx-text-fill: white; " + "-fx-font-size: 13px; " + "-fx-font-weight: bold; " + "-fx-padding: 8 18 8 18; " + "-fx-background-radius: 20; " + "-fx-cursor: hand;"));
 
                 // Delete Logic
                 deleteButton.setOnAction(evt -> {
@@ -410,30 +290,30 @@ public class TodoDashboardFormController implements Initializable {
                         if (isDeleted) {
                             doneListView.getItems().remove(vBox);
                             loadDashBoard();
-                            Notifications.create().title("Success").text("Completed Task deleted successfully!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
+                            Alert.trigger(AlertType.INFORMATION, "Completed Task deleted successfully !");
                         } else {
                             deleteButton.setDisable(false);
-                            Notifications.create().title("Error").text("Failed to delete completed task!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                            Alert.trigger(AlertType.ERROR, "Failed to delete completed task!");
                         }
                     } catch (Exception e) {
                         deleteButton.setDisable(false);
-                        Notifications.create().title("Error").text("An error occurred: " + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                        Alert.trigger(AlertType.ERROR, "An error occurred while deleting the completed task");
                     }
                 });
 
                 // Mark as Pending Logic (you must implement markTaskAsPending in your controller)
                 markPendingButton.setOnAction(evt -> {
                     try {
-                        boolean updated = TodoDashboardController.getInstance().markTaskAsPending(compTask.getId(),compTask.getUserId());
+                        boolean updated = TodoDashboardController.getInstance().markTaskAsPending(compTask.getId(), compTask.getUserId());
                         if (updated) {
                             doneListView.getItems().remove(vBox);
                             loadDashBoard();
-                            Notifications.create().title("Task Updated").text("Task marked as pending!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
+                            Alert.trigger(AlertType.INFORMATION, "Task marked as pending successfully !");
                         } else {
-                            Notifications.create().title("Error").text("Failed to update task!").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                            Alert.trigger(AlertType.ERROR, "Failed to mark task as pending!");
                         }
                     } catch (Exception e) {
-                        Notifications.create().title("Error").text("An error occurred: " + e.getMessage()).position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showError();
+                        Alert.trigger(AlertType.ERROR, "An error occurred while marking the task as pending");
                     }
                 });
 
@@ -442,18 +322,12 @@ public class TodoDashboardFormController implements Initializable {
                 doneListView.getItems().add(vBox);
             }
 
-            Notifications.create()
-                    .title("Loaded Tasks")
-                    .text("Completed tasks loaded successfully!")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(5))
-                    .showInformation();
+            alert.Alert.trigger(AlertType.INFORMATION, "Completed tasks loaded successfully !");
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading Completed tasks: " + e.getMessage()).hide();
+            System.out.println("Error loading completed tasks: " + e.getMessage());
         }
     }
-
 
     public void loadTaskOnActionButton(ActionEvent actionEvent) {
         loadDashBoard();
