@@ -26,16 +26,16 @@
                 <Image url="@../images/avatar.png" />
             </image>
         </ImageView>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#192a5470" height="210.0" layoutX="11.0" layoutY="279.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#182a5270" height="35.0" layoutX="13.0" layoutY="217.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="223.0" prefHeight="23.0" prefWidth="270.0" text="Plan your day todo with me !" textFill="#fcfcfc">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#93a4cd45" height="210.0" layoutX="11.0" layoutY="279.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
+        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#93a4cd70" height="35.0" layoutX="13.0" layoutY="217.0" stroke="#ff000024" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="223.0" prefHeight="23.0" prefWidth="270.0" text="Plan your Day !" textFill="WHITE">
             <font>
                 <Font name="Poppins Regular" size="15.0" />
             </font>
         </Label>
-        <JFXListView fx:id="todoListView" layoutX="332.0" layoutY="63.0" prefHeight="578.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
-        <JFXListView fx:id="doneListView" layoutX="717.0" layoutY="63.0" prefHeight="578.0" prefWidth="373.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
-        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="523.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="289.0" style="-fx-background-radius: 10; -fx-background-color: #05c46b; -fx-cursor: hand;" text="Add Task">
+        <JFXListView fx:id="todoListView" layoutX="342.0" layoutY="63.0" prefHeight="578.0" prefWidth="354.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
+        <JFXListView fx:id="doneListView" layoutX="727.0" layoutY="63.0" prefHeight="578.0" prefWidth="354.0" style="-fx-background-color: #dfe6e9; -fx-background-radius: 15;" />
+        <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="523.0" onAction="#addTaskOnActionButton" prefHeight="44.0" prefWidth="289.0" style="-fx-background-radius: 10; -fx-background-color: #05c46b; -fx-cursor: hand;" text="ADD Task">
             <font>
                 <Font name="Poppins Regular" size="16.0" />
             </font>
@@ -68,7 +68,7 @@
             <Font name="Poppins Regular" size="16.0" />
          </font>
       </JFXButton>
-        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="163.0" prefHeight="17.0" prefWidth="200.0" style="-fx-font-weight: 900;" text="Name" textFill="WHITE">
+        <Label fx:id="txtLogoName" alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="168.0" prefHeight="17.0" prefWidth="200.0" style="-fx-font-weight: 900;" text="Name" textFill="WHITE">
             <font>
                 <Font name="Poppins Bold" size="17.0" />
             </font>

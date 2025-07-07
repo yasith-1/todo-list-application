@@ -131,6 +131,7 @@ public class TodoDashboardFormController implements Initializable {
 
                     // HBOX  - Date and Checkbox in HBox
                     HBox hBox = new HBox();
+//                    hBox.setStyle("-fx-background-color: transparent;");
                     hBox.setSpacing(15);
                     hBox.setAlignment(Pos.CENTER_LEFT);
 
