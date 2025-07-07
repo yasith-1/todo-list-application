@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="686.0" prefWidth="1105.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dashboard.DashboardFormController">
+<AnchorPane prefHeight="686.0" prefWidth="1105.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dashboard.TodoDashboardFormController">
     <children>
         <Rectangle fill="#273c73" height="686.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="328.0" />
         <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#192a5630" height="35.0" layoutX="15.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="289.0" />

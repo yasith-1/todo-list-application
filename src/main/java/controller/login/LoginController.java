@@ -1,6 +1,6 @@
 package controller.login;
 
-import controller.dashboard.DashboardController;
+import controller.dashboard.TodoDashboardController;
 import database.DBconnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +28,7 @@ public class LoginController {
 
             if (resultSet.next()) {
                 // Set it in DashboardController
-                DashboardController.getInstance().setLoggedUserName(resultSet.getString("user_id"), resultSet.getString("username"));
+                TodoDashboardController.getInstance().setLoggedUserName(resultSet.getString("user_id"), resultSet.getString("username"));
 
                 return true; // Successful login
             }

@@ -13,54 +13,58 @@
 
 <AnchorPane prefHeight="466.0" prefWidth="815.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.login.LoginFormController">
    <children>
-      <Rectangle fill="#5f6365" height="472.0" layoutX="-22.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="476.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#b2bec3" height="440.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="424.0" />
-      <ImageView fitHeight="381.0" fitWidth="372.0" layoutX="40.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle fill="WHITE" height="472.0" layoutX="-22.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="457.0" />
+      <ImageView fitHeight="408.0" fitWidth="401.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Login.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="69.0" fitWidth="72.0" layoutX="512.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="41.0" layoutX="528.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/lock.png" />
          </image>
       </ImageView>
-      <Label layoutX="596.0" layoutY="68.0" text="USER LOGIN">
+      <Label layoutX="580.0" layoutY="27.0" text="USER LOGIN">
          <font>
             <Font name="Poppins Bold" size="26.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="usernameField" focusColor="#27ab9c" layoutX="494.0" layoutY="213.0" prefHeight="26.0" prefWidth="278.0" promptText="Username" style="-fx-cursor: hand;">
+      <JFXTextField fx:id="usernameField" focusColor="#0a3d62" layoutX="478.0" layoutY="192.0" prefHeight="31.0" prefWidth="291.0" promptText="Username" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="passwordField" focusColor="#27ab9c" layoutX="494.0" layoutY="276.0" prefHeight="26.0" prefWidth="278.0" promptText="Password" style="-fx-cursor: hand;">
+      <JFXPasswordField fx:id="passwordField" focusColor="#0a3d62" layoutX="478.0" layoutY="257.0" prefHeight="31.0" prefWidth="291.0" promptText="Password" style="-fx-cursor: hand;">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="346.0" onAction="#LoginOnActionButton" prefHeight="37.0" prefWidth="278.0" style="-fx-background-radius: 20; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Login" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="340.0" onAction="#LoginOnActionButton" prefHeight="37.0" prefWidth="291.0" style="-fx-background-radius: 10; -fx-background-color: #0a3d62; -fx-cursor: hand;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ffffff45" height="37.0" layoutX="481.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="291.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="487.0" layoutY="137.0" prefHeight="20.0" prefWidth="291.0" text="Keep safely your sensitive date !" textFill="#402323">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#b9b9b945" height="37.0" layoutX="478.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="291.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="484.0" layoutY="106.0" prefHeight="20.0" prefWidth="291.0" text="Keep safely your sensitive date !" textFill="#402323">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="410.0" prefHeight="37.0" prefWidth="313.0" text="Welcome Task Master !" textFill="#0a3d62">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="104.0" layoutY="412.0" prefHeight="37.0" prefWidth="171.0" text="Welcome !" textFill="#0a3d62">
          <font>
             <Font name="Poppins Bold" size="24.0" />
          </font>
       </Label>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="412.0" onAction="#signupOnActionButton" prefHeight="37.0" prefWidth="313.0" style="-fx-background-radius: 15; -fx-background-color: #3c6382; -fx-cursor: hand;" text="Don't have an account ? signup here" textFill="WHITE">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="395.0" onAction="#signupOnActionButton" prefHeight="37.0" prefWidth="291.0" style="-fx-background-radius: 10; -fx-background-color: #3c6382; -fx-cursor: hand;" text="Don't have an account ? signup here" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font size="16.0" />
          </font>
       </JFXButton>
-      <Separator layoutX="483.0" layoutY="113.0" prefHeight="4.0" prefWidth="299.0" style="-fx-background-color: #ced6e0;" />
+      <Separator layoutX="495.0" layoutY="71.0" prefHeight="3.0" prefWidth="263.0" style="-fx-background-color: #ced6e0;" />
+      <ImageView fitHeight="47.0" fitWidth="69.0" layoutX="266.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/welcome.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

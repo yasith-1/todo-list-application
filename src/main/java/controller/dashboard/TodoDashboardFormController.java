@@ -20,7 +20,6 @@ import javafx.util.Duration;
 import model.Task;
 import org.controlsfx.control.Notifications;
 import util.TaskStatus;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -32,7 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class DashboardFormController implements Initializable {
+public class TodoDashboardFormController implements Initializable {
 
     public Label txtLogoName;
     public DatePicker txtDate;
@@ -84,7 +83,7 @@ public class DashboardFormController implements Initializable {
                     Time.valueOf(LocalTime.now()),
                     TaskStatus.PENDING,
                     null);
-            Boolean isAdded = DashboardController.getInstance().saveTaskDatabase(task);
+            Boolean isAdded = TodoDashboardController.getInstance().saveTaskDatabase(task);
             if (isAdded) {
                 Notifications.create().title("Success").text("Task added Successfully !").position(Pos.BOTTOM_RIGHT).showInformation();
                 clearTextField();
@@ -96,7 +95,7 @@ public class DashboardFormController implements Initializable {
     }
 
     private void setUserName() {
-        String loggedUserName = DashboardController.getInstance().getLoggedUserName();
+        String loggedUserName = TodoDashboardController.getInstance().getLoggedUserName();
         txtLogoName.setText(loggedUserName);
     }
 
@@ -118,7 +117,7 @@ public class DashboardFormController implements Initializable {
     //    Load task method---------------------------------------------------------------------------------------
     private void loadtask() {
         try {
-            ArrayList<Task> taskArrayList = DashboardController.getInstance().loadTask();
+            ArrayList<Task> taskArrayList = TodoDashboardController.getInstance().loadTask();
 
             if (taskArrayList == null || taskArrayList.isEmpty()) {
                 Notifications.create().title("Information").
@@ -225,7 +224,7 @@ public class DashboardFormController implements Initializable {
                     checkBox.setOnAction(actionEvent -> {
                         if (checkBox.isSelected()) {
                             try {
-                                Boolean isCompTaskAdded = DashboardController.getInstance().addCompletedTask(
+                                Boolean isCompTaskAdded = TodoDashboardController.getInstance().addCompletedTask(
                                         task.getId(),
                                         task.getUserId(),
                                         Date.valueOf(LocalDate.now()),
@@ -258,7 +257,7 @@ public class DashboardFormController implements Initializable {
 //                    Delete logic
                     deleteButton.setOnAction(evt -> {
                         try {
-                            Boolean isDeleted = DashboardController.getInstance().removeTask(task.getId(), task.getUserId());
+                            Boolean isDeleted = TodoDashboardController.getInstance().removeTask(task.getId(), task.getUserId());
                             if (isDeleted) {
                                 todoListView.getItems().remove(vBox);
                                 loadDashBoard();
@@ -286,7 +285,7 @@ public class DashboardFormController implements Initializable {
         try {
             doneListView.getItems().clear(); // Clear old list
 
-            ArrayList<Task> compTaskArrayList = DashboardController.getInstance().loadCompletedTask();
+            ArrayList<Task> compTaskArrayList = TodoDashboardController.getInstance().loadCompletedTask();
 
             if (compTaskArrayList == null || compTaskArrayList.isEmpty()) {
                 Notifications.create()
@@ -407,7 +406,7 @@ public class DashboardFormController implements Initializable {
                 deleteButton.setOnAction(evt -> {
                     try {
                         deleteButton.setDisable(true);
-                        Boolean isDeleted = DashboardController.getInstance().removeTask(compTask.getId(), compTask.getUserId());
+                        Boolean isDeleted = TodoDashboardController.getInstance().removeTask(compTask.getId(), compTask.getUserId());
                         if (isDeleted) {
                             doneListView.getItems().remove(vBox);
                             loadDashBoard();
@@ -425,7 +424,7 @@ public class DashboardFormController implements Initializable {
                 // Mark as Pending Logic (you must implement markTaskAsPending in your controller)
                 markPendingButton.setOnAction(evt -> {
                     try {
-                        boolean updated = DashboardController.getInstance().markTaskAsPending(compTask.getId(),compTask.getUserId());
+                        boolean updated = TodoDashboardController.getInstance().markTaskAsPending(compTask.getId(),compTask.getUserId());
                         if (updated) {
                             doneListView.getItems().remove(vBox);
                             loadDashBoard();

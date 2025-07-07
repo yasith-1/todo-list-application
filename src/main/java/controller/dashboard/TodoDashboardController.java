@@ -7,19 +7,19 @@ import util.TaskStatus;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DashboardController {
+public class TodoDashboardController {
 
     private String username;
     private String userId;
 
-    private static DashboardController instance;
+    private static TodoDashboardController instance;
 
-    private DashboardController() {
+    private TodoDashboardController() {
     }
 
-    public static DashboardController getInstance() {
+    public static TodoDashboardController getInstance() {
         if (instance == null) {
-            instance = new DashboardController();
+            instance = new TodoDashboardController();
         }
         return instance;
     }
@@ -155,10 +155,4 @@ public class DashboardController {
                 id, userId);
         return result;
     }
-//
-//    public Boolean removeCompletedTask(String taskId, String userId) throws SQLException {
-//        String query = "DELETE FROM `completedtask` WHERE `comptask_id`='" + taskId + "' AND `user_id`='" + userId + "'";
-//        Statement statement = DBconnection.getInstance().getConnection().createStatement();
-//        return statement.executeUpdate(query) > 0;
-//    }
 }
