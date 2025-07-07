@@ -1,17 +1,16 @@
 package controller.login;
 
+import alert.Alert;
+import alert.AlertType;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.controlsfx.control.Notifications;
-
 import java.io.IOException;
 
 public class LoginFormController {
@@ -26,10 +25,10 @@ public class LoginFormController {
     @FXML
     void LoginOnActionButton(ActionEvent actionEvent) throws IOException {
         if (usernameField.getText().isEmpty()) {
-            Notifications.create().title("Warning").text("Missing username").position(Pos.BOTTOM_RIGHT).showInformation();
+            Alert.trigger(AlertType.WARNING, "Enter a username.");
             return;
         } else if (passwordField.getText().isEmpty()) {
-            Notifications.create().title("Warning").text("Missing password").position(Pos.BOTTOM_RIGHT).showInformation();
+            Alert.trigger( AlertType.WARNING, "Enter a strong password.");
             return;
         } else {
 
@@ -46,7 +45,7 @@ public class LoginFormController {
                 stage.show();
             } else {
 //                user not found(decline access to login)
-                Notifications.create().title("Warning").text("User Not Found , Please Create an account !").position(Pos.BOTTOM_RIGHT).showInformation();
+                Alert.trigger( AlertType.WARNING, "User Not Found , Please Create an account !");
             }
         }
     }
