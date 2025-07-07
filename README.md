@@ -12,7 +12,7 @@
 
 ## 📋 Overview
 
-A comprehensive **Library Management System** built with JavaFX that provides complete CRUD operations for managing library resources. This system streamlines library operations with an intuitive interface and robust functionality.
+A comprehensive JavaFX-based todo application with user authentication, task management, and a modern GUI interface. ✨
 
 ### ✨ Key Features
 
